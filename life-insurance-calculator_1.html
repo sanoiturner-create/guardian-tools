@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Life Insurance Needs Calculator | Get Your Free Estimate</title>
+<meta name="description" content="Find out exactly how much life insurance coverage your family needs. Free calculator — takes 2 minutes.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0D1B2A;
+    --navy-mid: #1A2E44;
+    --gold: #C8973A;
+    --gold-light: #E8B85A;
+    --cream: #F8F4EE;
+    --cream-dark: #EDE8DF;
+    --text: #1A1A2E;
+    --text-muted: #5A6070;
+    --white: #FFFFFF;
+    --success: #2D7A4F;
+    --radius: 12px;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    min-height: 100vh;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  /* Header */
+  header {
+    background: var(--navy);
+    padding: 18px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo {
+    font-family: 'Playfair Display', serif;
+    color: var(--gold);
+    font-size: 20px;
+    letter-spacing: 0.02em;
+  }
+  .logo span { color: var(--white); font-weight: 300; font-size: 14px; display: block; font-family: 'DM Sans', sans-serif; letter-spacing: 0.08em; text-transform: uppercase; }
+
+  /* Hero */
+  .hero {
+    background: var(--navy);
+    padding: 48px 24px 64px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(200,151,58,0.12) 0%, transparent 70%);
+  }
+  .hero-tag {
+    display: inline-block;
+    background: rgba(200,151,58,0.15);
+    color: var(--gold-light);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 100px;
+    border: 1px solid rgba(200,151,58,0.3);
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 5vw, 44px);
+    color: var(--white);
+    line-height: 1.2;
+    margin-bottom: 16px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .hero h1 em { color: var(--gold); font-style: normal; }
+  .hero p {
+    color: rgba(255,255,255,0.65);
+    font-size: 16px;
+    max-width: 480px;
+    margin: 0 auto;
+    font-weight: 300;
+  }
+
+  /* Main layout */
+  .main {
+    max-width: 760px;
+    margin: -32px auto 0;
+    padding: 0 16px 60px;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Progress */
+  .progress-bar {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 24px;
+  }
+  .progress-step {
+    flex: 1;
+    height: 4px;
+    background: var(--cream-dark);
+    border-radius: 100px;
+    transition: background 0.4s;
+  }
+  .progress-step.active { background: var(--gold); }
+  .progress-step.done { background: var(--navy); }
+
+  /* Cards */
+  .card {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 32px;
+    margin-bottom: 16px;
+    border: 1px solid rgba(0,0,0,0.06);
+    box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+  }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+  .card h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    color: var(--navy);
+    margin-bottom: 24px;
+    font-weight: 600;
+  }
+
+  /* Form fields */
+  .field { margin-bottom: 20px; }
+  .field label {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+    letter-spacing: 0.02em;
+  }
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  input[type="number"], select {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1.5px solid var(--cream-dark);
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    color: var(--text);
+    background: var(--cream);
+    transition: border-color 0.2s;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+  input[type="number"]:focus, select:focus {
+    outline: none;
+    border-color: var(--gold);
+    background: var(--white);
+  }
+  .input-prefix {
+    position: relative;
+  }
+  .input-prefix span {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    font-size: 14px;
+    pointer-events: none;
+  }
+  .input-prefix input { padding-left: 36px; }
+
+  /* Slider */
+  .slider-field label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+  .slider-field label strong {
+    color: var(--navy);
+    font-size: 16px;
+    font-weight: 500;
+  }
+  input[type="range"] {
+    width: 100%;
+    height: 4px;
+    appearance: none;
+    background: var(--cream-dark);
+    border-radius: 100px;
+    outline: none;
+    cursor: pointer;
+    margin-bottom: 4px;
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--navy);
+    border: 3px solid var(--gold);
+    cursor: pointer;
+  }
+  .slider-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+
+  /* Buttons */
+  .btn-primary {
+    width: 100%;
+    padding: 16px;
+    background: var(--navy);
+    color: var(--white);
+    border: none;
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    letter-spacing: 0.02em;
+    margin-top: 8px;
+  }
+  .btn-primary:hover { background: var(--navy-mid); }
+  .btn-primary:active { transform: scale(0.99); }
+
+  .btn-gold {
+    background: var(--gold);
+    color: var(--white);
+  }
+  .btn-gold:hover { background: var(--gold-light); }
+
+  .btn-outline {
+    width: 100%;
+    padding: 14px;
+    background: transparent;
+    color: var(--text-muted);
+    border: 1.5px solid var(--cream-dark);
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: border-color 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--navy); color: var(--navy); }
+
+  /* Result card */
+  .result-card {
+    background: var(--navy);
+    border-radius: var(--radius);
+    padding: 36px 32px;
+    margin-bottom: 16px;
+    text-align: center;
+    display: none;
+  }
+  .result-card.show { display: block; animation: fadeUp 0.5s ease; }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .result-label {
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 8px;
+  }
+  .result-amount {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 8vw, 56px);
+    color: var(--gold);
+    font-weight: 600;
+    line-height: 1.1;
+    margin-bottom: 8px;
+  }
+  .result-sub {
+    font-size: 14px;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 28px;
+    font-weight: 300;
+  }
+  .result-breakdown {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 28px;
+  }
+  .breakdown-item {
+    background: rgba(255,255,255,0.05);
+    padding: 14px 8px;
+    text-align: center;
+  }
+  .breakdown-item .b-val {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--white);
+    display: block;
+  }
+  .breakdown-item .b-label {
+    font-size: 11px;
+    color: rgba(255,255,255,0.45);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    display: block;
+    margin-top: 3px;
+  }
+
+  /* Lead form */
+  .lead-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 32px;
+    border: 2px solid var(--gold);
+    display: none;
+  }
+  .lead-card.show { display: block; animation: fadeUp 0.5s ease 0.2s both; }
+  .lead-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+  .lead-card p {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+    line-height: 1.6;
+  }
+  .lead-card input[type="text"],
+  .lead-card input[type="tel"],
+  .lead-card input[type="email"] {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1.5px solid var(--cream-dark);
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    color: var(--text);
+    background: var(--cream);
+    margin-bottom: 12px;
+    transition: border-color 0.2s;
+  }
+  .lead-card input:focus {
+    outline: none;
+    border-color: var(--gold);
+    background: var(--white);
+  }
+  .privacy-note {
+    font-size: 12px;
+    color: var(--text-muted);
+    text-align: center;
+    margin-top: 12px;
+    opacity: 0.7;
+  }
+
+  /* Thank you */
+  .thankyou-card {
+    background: var(--success);
+    border-radius: var(--radius);
+    padding: 36px 32px;
+    text-align: center;
+    display: none;
+  }
+  .thankyou-card.show { display: block; animation: fadeUp 0.4s ease; }
+  .thankyou-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    color: var(--white);
+    margin-bottom: 10px;
+  }
+  .thankyou-card p {
+    color: rgba(255,255,255,0.8);
+    font-size: 15px;
+    font-weight: 300;
+  }
+  .check-circle {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 26px;
+  }
+
+  /* Trust bar */
+  .trust-bar {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    flex-wrap: wrap;
+    padding: 24px 16px;
+    border-top: 1px solid var(--cream-dark);
+    margin-top: 16px;
+  }
+  .trust-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+  .trust-icon {
+    width: 20px; height: 20px;
+    background: var(--navy);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gold);
+    font-size: 11px;
+  }
+
+  /* Footer */
+  footer {
+    background: var(--navy);
+    text-align: center;
+    padding: 24px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+  }
+
+  @media (max-width: 540px) {
+    .field-row { grid-template-columns: 1fr; }
+    .result-breakdown { grid-template-columns: 1fr; }
+    .card, .result-card, .lead-card { padding: 24px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    LifeCover<span>Calculator · Jamaica</span>
+  </div>
+  <div style="font-size:12px; color:rgba(255,255,255,0.4); font-weight:300;">Free · No obligation</div>
+</header>
+
+<div class="hero">
+  <div class="hero-tag">2-minute tool</div>
+  <h1>How much life insurance does your family <em>actually</em> need?</h1>
+  <p>Answer a few simple questions and get a personalised coverage estimate in seconds.</p>
+</div>
+
+<div class="main">
+
+  <div class="progress-bar" id="progressBar">
+    <div class="progress-step active" id="p1"></div>
+    <div class="progress-step" id="p2"></div>
+    <div class="progress-step" id="p3"></div>
+  </div>
+
+  <!-- Step 1: Income & Family -->
+  <div class="card" id="step1">
+    <div class="section-label">Step 1 of 3</div>
+    <h2>Your income & family</h2>
+
+    <div class="field-row">
+      <div class="field">
+        <label>Your age</label>
+        <input type="number" id="age" placeholder="e.g. 35" min="18" max="70">
+      </div>
+      <div class="field">
+        <label>Dependants</label>
+        <select id="dependants">
+          <option value="">Select</option>
+          <option value="0">None</option>
+          <option value="1">1 person</option>
+          <option value="2">2 people</option>
+          <option value="3">3 people</option>
+          <option value="4">4+ people</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Annual income (JMD)</label>
+      <div class="input-prefix">
+        <span>$</span>
+        <input type="number" id="income" placeholder="e.g. 1,800,000" min="0">
+      </div>
+    </div>
+
+    <div class="field slider-field">
+      <label>
+        Years of income to replace
+        <strong id="yearsLabel">10 years</strong>
+      </label>
+      <input type="range" id="years" min="5" max="30" value="10" step="1"
+        oninput="document.getElementById('yearsLabel').textContent = this.value + ' years'">
+      <div class="slider-labels"><span>5 yrs</span><span>30 yrs</span></div>
+    </div>
+
+    <button class="btn-primary" onclick="goStep2()">Continue →</button>
+  </div>
+
+  <!-- Step 2: Debts & Expenses -->
+  <div class="card" id="step2" style="display:none">
+    <div class="section-label">Step 2 of 3</div>
+    <h2>Your debts & future expenses</h2>
+
+    <div class="field">
+      <label>Outstanding mortgage / rent (total remaining, JMD)</label>
+      <div class="input-prefix">
+        <span>$</span>
+        <input type="number" id="mortgage" placeholder="0 if renting or none" min="0" value="0">
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Other debts (loans, credit cards, JMD)</label>
+      <div class="input-prefix">
+        <span>$</span>
+        <input type="number" id="debts" placeholder="e.g. 500,000" min="0" value="0">
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Children's education fund needed (JMD)</label>
+      <div class="input-prefix">
+        <span>$</span>
+        <input type="number" id="education" placeholder="e.g. 2,000,000" min="0" value="0">
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Existing life insurance coverage (JMD)</label>
+      <div class="input-prefix">
+        <span>$</span>
+        <input type="number" id="existing" placeholder="0 if none" min="0" value="0">
+      </div>
+    </div>
+
+    <button class="btn-primary" onclick="goStep3()">Calculate my coverage →</button>
+    <button class="btn-outline" onclick="goStep(1)">← Back</button>
+  </div>
+
+  <!-- Step 3: Result -->
+  <div id="step3" style="display:none">
+    <div class="section-label" style="text-align:center; margin-bottom:12px">Your result</div>
+
+    <div class="result-card show" id="resultCard">
+      <div class="result-label">Recommended coverage</div>
+      <div class="result-amount" id="resultAmount">$0</div>
+      <div class="result-sub" id="resultSub">Based on your inputs</div>
+      <div class="result-breakdown" id="resultBreakdown"></div>
+      <div style="font-size:13px; color:rgba(255,255,255,0.45); font-style:italic;">
+        This is an estimate. A licensed advisor can fine-tune this for your situation.
+      </div>
+    </div>
+
+    <div class="lead-card show" id="leadCard">
+      <h3>Get your free consultation</h3>
+      <p>A Guardian Life advisor will review your result with you — no pressure, no cost. We'll confirm the right coverage and walk you through your options in plain language.</p>
+      <input type="text" id="leadName" placeholder="Your name">
+      <input type="tel" id="leadPhone" placeholder="WhatsApp number">
+      <input type="email" id="leadEmail" placeholder="Email address (optional)">
+      <button class="btn-primary btn-gold" onclick="submitLead()">Book my free consultation →</button>
+      <p class="privacy-note">🔒 Your information stays private. No spam, no cold calls from strangers.</p>
+    </div>
+
+    <div class="thankyou-card" id="thankyouCard">
+      <div class="check-circle">✓</div>
+      <h3>You're all set!</h3>
+      <p>Thank you. Your advisor will reach out on WhatsApp within 24 hours to go over your results and answer any questions.</p>
+    </div>
+
+    <button class="btn-outline" onclick="goStep(2)" style="margin-top:0">← Recalculate</button>
+  </div>
+
+  <div class="trust-bar">
+    <div class="trust-item">
+      <div class="trust-icon">✓</div>
+      Free to use
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">🔒</div>
+      Private & secure
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">◎</div>
+      Guardian Life licensed
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  © 2025 LifeCover Calculator · Powered by Guardian Life · Montego Bay, Jamaica<br>
+  <span style="font-size:11px; opacity:0.5; margin-top:4px; display:block;">Results are estimates only and do not constitute financial advice.</span>
+</footer>
+
+<script>
+  function goStep2() {
+    const age = document.getElementById('age').value;
+    const income = document.getElementById('income').value;
+    const dep = document.getElementById('dependants').value;
+    if (!age || !income || !dep) {
+      alert('Please fill in all fields to continue.');
+      return;
+    }
+    goStep(2);
+  }
+
+  function goStep3() {
+    calculate();
+    goStep(3);
+  }
+
+  function goStep(n) {
+    document.getElementById('step1').style.display = n === 1 ? 'block' : 'none';
+    document.getElementById('step2').style.display = n === 2 ? 'block' : 'none';
+    document.getElementById('step3').style.display = n === 3 ? 'block' : 'none';
+
+    ['p1','p2','p3'].forEach((id, i) => {
+      const el = document.getElementById(id);
+      el.className = 'progress-step';
+      if (i + 1 < n) el.classList.add('done');
+      else if (i + 1 === n) el.classList.add('active');
+    });
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function fmt(n) {
+    return 'J$' + Math.round(n).toLocaleString();
+  }
+
+  function calculate() {
+    const income = parseFloat(document.getElementById('income').value) || 0;
+    const years = parseInt(document.getElementById('years').value) || 10;
+    const mortgage = parseFloat(document.getElementById('mortgage').value) || 0;
+    const debts = parseFloat(document.getElementById('debts').value) || 0;
+    const education = parseFloat(document.getElementById('education').value) || 0;
+    const existing = parseFloat(document.getElementById('existing').value) || 0;
+    const dep = parseInt(document.getElementById('dependants').value) || 0;
+
+    const incomeReplacement = income * years;
+    const debtsCoverage = mortgage + debts;
+    const educationCoverage = education;
+    const depBonus = dep > 2 ? income * 2 : dep > 0 ? income * 1 : 0;
+
+    const gross = incomeReplacement + debtsCoverage + educationCoverage + depBonus;
+    const net = Math.max(0, gross - existing);
+
+    document.getElementById('resultAmount').textContent = fmt(net);
+    document.getElementById('resultSub').textContent =
+      net > 0
+        ? 'Additional coverage recommended beyond what you currently hold'
+        : 'Your current coverage may be sufficient — an advisor can confirm';
+
+    document.getElementById('resultBreakdown').innerHTML = `
+      <div class="breakdown-item">
+        <span class="b-val">${fmt(incomeReplacement)}</span>
+        <span class="b-label">Income (${years} yrs)</span>
+      </div>
+      <div class="breakdown-item">
+        <span class="b-val">${fmt(debtsCoverage)}</span>
+        <span class="b-label">Debts</span>
+      </div>
+      <div class="breakdown-item">
+        <span class="b-val">${fmt(educationCoverage + depBonus)}</span>
+        <span class="b-label">Family needs</span>
+      </div>
+    `;
+  }
+
+  function submitLead() {
+    const name = document.getElementById('leadName').value.trim();
+    const phone = document.getElementById('leadPhone').value.trim();
+    const email = document.getElementById('leadEmail').value.trim();
+    if (!name || !phone) {
+      alert('Please enter your name and WhatsApp number.');
+      return;
+    }
+
+    const coverage = document.getElementById('resultAmount').textContent;
+    const income = document.getElementById('income').value || '0';
+    const age = document.getElementById('age').value || 'N/A';
+    const dep = document.getElementById('dependants').value || '0';
+
+    const message =
+      '🔔 *New Insurance Lead*\n\n' +
+      '*Name:* ' + name + '\n' +
+      '*WhatsApp:* ' + phone + '\n' +
+      (email ? '*Email:* ' + email + '\n' : '') +
+      '\n*Calculator Results*\n' +
+      '*Recommended coverage:* ' + coverage + '\n' +
+      '*Annual income:* J$' + parseInt(income).toLocaleString() + '\n' +
+      '*Age:* ' + age + '\n' +
+      '*Dependants:* ' + dep + '\n\n' +
+      '_Submitted via LifeCover Calculator_';
+
+    const waNumber = '18764648206';
+    const waURL = 'https://wa.me/' + waNumber + '?text=' + encodeURIComponent(message);
+
+    window.open(waURL, '_blank');
+
+    document.getElementById('leadCard').style.display = 'none';
+    document.getElementById('thankyouCard').classList.add('show');
+  }
+</script>
+</body>
+</html>

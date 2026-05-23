@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Consultation | Guardian Life</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --gold: #c9a84c;
+      --gold-light: #e8c97a;
+      --dark: #0e0e0e;
+      --surface: #161616;
+      --surface-2: #1e1e1e;
+      --border: rgba(201,168,76,0.2);
+      --text: #f0ece4;
+      --muted: #888;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--dark);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+      background-image:
+        radial-gradient(ellipse 80% 60% at 50% -10%, rgba(201,168,76,0.08) 0%, transparent 70%),
+        url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c9a84c' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      width: 100%;
+      max-width: 580px;
+      overflow: hidden;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(201,168,76,0.05);
+      animation: fadeUp 0.6s ease both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .card-header {
+      background: linear-gradient(135deg, #1a1608 0%, #0e0e0e 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 2.5rem 2.5rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-header::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+
+    .logo-line {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 1.25rem;
+    }
+
+    .logo-emblem {
+      width: 32px;
+      height: 32px;
+      border: 1.5px solid var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-emblem svg {
+      width: 16px;
+      height: 16px;
+      fill: var(--gold);
+    }
+
+    .logo-text {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 500;
+    }
+
+    .card-header h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem;
+      font-weight: 600;
+      line-height: 1.15;
+      color: var(--text);
+      margin-bottom: 0.6rem;
+    }
+
+    .card-header p {
+      color: var(--muted);
+      font-size: 0.875rem;
+      font-weight: 300;
+      line-height: 1.6;
+    }
+
+    .card-body {
+      padding: 2rem 2.5rem 2.5rem;
+    }
+
+    .section-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 500;
+      margin-bottom: 1.25rem;
+      margin-top: 1.75rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .section-label:first-child { margin-top: 0; }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 1rem;
+    }
+
+    .field:last-child { margin-bottom: 0; }
+
+    label {
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      color: #aaa;
+      font-weight: 400;
+      text-transform: uppercase;
+    }
+
+    label span.req {
+      color: var(--gold);
+      margin-left: 2px;
+    }
+
+    input, select, textarea {
+      background: var(--surface-2);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 2px;
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 300;
+      padding: 0.65rem 0.85rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      width: 100%;
+      outline: none;
+      -webkit-appearance: none;
+    }
+
+    input::placeholder, textarea::placeholder {
+      color: #444;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: rgba(201,168,76,0.5);
+      box-shadow: 0 0 0 3px rgba(201,168,76,0.06);
+    }
+
+    select {
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 2rem;
+    }
+
+    select option {
+      background: #1e1e1e;
+      color: var(--text);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .radio-group {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .radio-option {
+      flex: 1;
+      position: relative;
+    }
+
+    .radio-option input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+    }
+
+    .radio-option label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.6rem;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 2px;
+      background: var(--surface-2);
+      cursor: pointer;
+      font-size: 0.8rem;
+      letter-spacing: 0.04em;
+      text-transform: none;
+      color: #aaa;
+      transition: all 0.2s;
+      user-select: none;
+    }
+
+    .radio-option input[type="radio"]:checked + label {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: rgba(201,168,76,0.06);
+    }
+
+    .submit-btn {
+      width: 100%;
+      margin-top: 2rem;
+      padding: 1rem;
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+      color: #0e0e0e;
+      border: none;
+      border-radius: 2px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+
+    .submit-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+    .submit-btn:active { transform: translateY(0); }
+
+    .disclaimer {
+      font-size: 0.72rem;
+      color: #555;
+      text-align: center;
+      margin-top: 1.25rem;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 480px) {
+      .card-header, .card-body { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .row { grid-template-columns: 1fr; }
+      .card-header h1 { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="card">
+  <div class="card-header">
+    <div class="logo-line">
+      <div class="logo-emblem">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.35C17.25 22.15 21 17.25 21 12V7L12 2z"/>
+        </svg>
+      </div>
+      <span class="logo-text">Guardian Life Limited</span>
+    </div>
+    <h1>Request a Free Consultation</h1>
+    <p>Fill in your details below and I will be in touch to discuss a plan that fits your life and budget.</p>
+  </div>
+
+  <div class="card-body">
+    <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+
+      <!-- PERSONAL INFO -->
+      <div class="section-label">Personal Information</div>
+
+      <div class="row">
+        <div class="field">
+          <label>First Name <span class="req">*</span></label>
+          <input type="text" name="first_name" placeholder="John" required />
+        </div>
+        <div class="field">
+          <label>Last Name <span class="req">*</span></label>
+          <input type="text" name="last_name" placeholder="Brown" required />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label>Date of Birth <span class="req">*</span></label>
+          <input type="date" name="date_of_birth" required />
+        </div>
+        <div class="field">
+          <label>Gender <span class="req">*</span></label>
+          <div class="radio-group" style="margin-top:2px;">
+            <div class="radio-option">
+              <input type="radio" name="gender" id="male" value="Male" required />
+              <label for="male">Male</label>
+            </div>
+            <div class="radio-option">
+              <input type="radio" name="gender" id="female" value="Female" />
+              <label for="female">Female</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONTACT -->
+      <div class="section-label">Contact Details</div>
+
+      <div class="field">
+        <label>WhatsApp / Phone <span class="req">*</span></label>
+        <input type="tel" name="phone" placeholder="+1 876 XXX XXXX" required />
+      </div>
+
+      <div class="field">
+        <label>Email Address</label>
+        <input type="email" name="email" placeholder="john@email.com" />
+      </div>
+
+      <div class="field">
+        <label>Preferred Contact Time <span class="req">*</span></label>
+        <select name="preferred_contact_time" required>
+          <option value="" disabled selected>Select a time</option>
+          <option>Morning (8am - 12pm)</option>
+          <option>Afternoon (12pm - 4pm)</option>
+          <option>Evening (4pm - 7pm)</option>
+        </select>
+      </div>
+
+      <!-- QUALIFYING INFO -->
+      <div class="section-label">Coverage Details</div>
+
+      <div class="field">
+        <label>Occupation / Employer</label>
+        <input type="text" name="occupation" placeholder="e.g. Teacher, NWA, Self-employed" />
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label>Do you currently smoke?</label>
+          <div class="radio-group" style="margin-top:2px;">
+            <div class="radio-option">
+              <input type="radio" name="smoker" id="smoker_yes" value="Yes" />
+              <label for="smoker_yes">Yes</label>
+            </div>
+            <div class="radio-option">
+              <input type="radio" name="smoker" id="smoker_no" value="No" />
+              <label for="smoker_no">No</label>
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label>Existing life insurance?</label>
+          <div class="radio-group" style="margin-top:2px;">
+            <div class="radio-option">
+              <input type="radio" name="existing_coverage" id="covered_yes" value="Yes" />
+              <label for="covered_yes">Yes</label>
+            </div>
+            <div class="radio-option">
+              <input type="radio" name="existing_coverage" id="covered_no" value="No" />
+              <label for="covered_no">No</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Primary Reason for Interest <span class="req">*</span></label>
+        <select name="reason_for_interest" required>
+          <option value="" disabled selected>Select a reason</option>
+          <option>Family Protection</option>
+          <option>Savings / Investment</option>
+          <option>Retirement Planning</option>
+          <option>Final Expenses / Burial</option>
+          <option>Mortgage / Loan Protection</option>
+          <option>Other</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Monthly Budget (JMD)</label>
+        <select name="monthly_budget">
+          <option value="" disabled selected>Select a range</option>
+          <option>Under $2,000</option>
+          <option>$2,000 - $5,000</option>
+          <option>$5,000 - $10,000</option>
+          <option>$10,000 - $20,000</option>
+          <option>$20,000+</option>
+          <option>Not sure yet</option>
+        </select>
+      </div>
+
+      <!-- REFERRAL + NOTES -->
+      <div class="section-label">Additional Info</div>
+
+      <div class="field">
+        <label>How did you hear about me?</label>
+        <select name="referral_source">
+          <option value="" disabled selected>Select one</option>
+          <option>Referral from a friend / family</option>
+          <option>Social media</option>
+          <option>Met in person</option>
+          <option>Workplace visit</option>
+          <option>Other</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Any questions or notes?</label>
+        <textarea name="notes" placeholder="Anything you'd like me to know before we speak..."></textarea>
+      </div>
+
+      <button type="submit" class="submit-btn">Request My Free Consultation</button>
+
+      <p class="disclaimer">Your information is kept private and will only be used to prepare your consultation. No spam, ever.</p>
+
+    </form>
+  </div>
+</div>
+
+</body>
+</html>
