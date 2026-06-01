@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Life Insurance FAQ | Sanoi Turner</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F5F0E8;
+    --tan: #C9B99A;
+    --tan-light: #E8DDD0;
+    --tan-dark: #9E8B74;
+    --brown: #5C4A35;
+    --brown-dark: #3A2E22;
+    --text: #2A2118;
+    --text-muted: #7A6A58;
+    --white: #FFFFFF;
+    --accent: #8B6914;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background-color: var(--cream);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  header {
+    background: var(--brown-dark);
+    padding: 3rem 1.5rem 2.5rem;
+    text-align: center;
+  }
+
+  header .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--tan);
+    margin-bottom: 0.75rem;
+    font-weight: 500;
+  }
+
+  header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.2rem;
+    color: var(--white);
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+
+  header p {
+    font-size: 15px;
+    color: var(--tan-light);
+    max-width: 380px;
+    margin: 0 auto 1.5rem;
+    font-weight: 300;
+  }
+
+  .cta-btn {
+    display: inline-block;
+    background: var(--tan);
+    color: var(--brown-dark);
+    font-size: 14px;
+    font-weight: 600;
+    padding: 0.65rem 1.75rem;
+    border-radius: 100px;
+    text-decoration: none;
+    letter-spacing: 0.03em;
+    transition: background 0.2s;
+  }
+
+  .cta-btn:hover { background: var(--tan-light); }
+
+  .categories {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 1.25rem 1.5rem;
+    background: var(--white);
+    border-bottom: 1px solid var(--tan-light);
+    scrollbar-width: none;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .categories::-webkit-scrollbar { display: none; }
+
+  .cat-btn {
+    flex-shrink: 0;
+    background: transparent;
+    border: 1px solid var(--tan);
+    color: var(--brown);
+    font-size: 13px;
+    font-weight: 500;
+    padding: 0.4rem 1rem;
+    border-radius: 100px;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: all 0.2s;
+  }
+
+  .cat-btn.active, .cat-btn:hover {
+    background: var(--brown-dark);
+    border-color: var(--brown-dark);
+    color: var(--white);
+  }
+
+  .faq-section {
+    padding: 0 1.5rem 4rem;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--tan-dark);
+    font-weight: 600;
+    margin: 2rem 0 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--tan-light);
+  }
+
+  .faq-item {
+    border-bottom: 1px solid var(--tan-light);
+  }
+
+  .faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    text-align: left;
+    padding: 1.1rem 0;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    line-height: 1.5;
+  }
+
+  .faq-question:hover { color: var(--brown); }
+
+  .faq-icon {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--tan-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    color: var(--brown);
+    transition: all 0.25s;
+    margin-top: 2px;
+    line-height: 1;
+  }
+
+  .faq-item.open .faq-icon {
+    background: var(--brown-dark);
+    color: var(--white);
+    transform: rotate(45deg);
+  }
+
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease, padding 0.25s ease;
+  }
+
+  .faq-item.open .faq-answer {
+    max-height: 600px;
+    padding-bottom: 1.25rem;
+  }
+
+  .faq-answer p {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.75;
+  }
+
+  .bottom-cta {
+    background: var(--brown-dark);
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+  }
+
+  .bottom-cta h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.6rem;
+    color: var(--white);
+    margin-bottom: 0.75rem;
+  }
+
+  .bottom-cta p {
+    font-size: 14px;
+    color: var(--tan-light);
+    margin-bottom: 1.5rem;
+    font-weight: 300;
+  }
+
+  .faq-count {
+    display: inline-block;
+    background: var(--tan-light);
+    color: var(--brown-dark);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 100px;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow">Sanoi Turner · Guardian Life</p>
+  <h1>Life Insurance<br><em>Simplified</em></h1>
+  <p>Real answers to the questions most people are afraid to ask.</p>
+  <a href="https://wa.me/" class="cta-btn">Chat with Sanoi</a>
+</header>
+
+<div class="categories">
+  <button class="cat-btn active" onclick="filterCat('all', this)">All <span class="faq-count">30</span></button>
+  <button class="cat-btn" onclick="filterCat('myths', this)">Myths</button>
+  <button class="cat-btn" onclick="filterCat('young', this)">I'm Young</button>
+  <button class="cat-btn" onclick="filterCat('money', this)">Cost & Money</button>
+  <button class="cat-btn" onclick="filterCat('policy', this)">How It Works</button>
+  <button class="cat-btn" onclick="filterCat('family', this)">Family</button>
+</div>
+
+<div class="faq-section">
+
+  <div class="section-label" data-cat="myths">Myths & Misconceptions</div>
+
+  <div class="faq-item" data-cat="myths">
+    <button class="faq-question" onclick="toggle(this)">
+      "Isn't life insurance a scam?"
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">
+      <p>This comes up a lot. The confusion usually stems from people who paid premiums for years, never made a claim, and felt like they wasted money. But that's like saying your car insurance was a scam because you never crashed. The value was never in collecting — it was in knowing you were covered if something happened. The people who say it's a scam are usually the ones who never needed it. The families who lost a breadwinner with no coverage tell a very different story.</p>
+    </div>
+  </div>
+
+  <div class="faq-item" data-cat="myths">
+    <button class="faq-question" onclick="toggle(this)">
+      "Life insurance companies always find a way not to pay"
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">
+      <p>Claims get denied for specific reasons — usually non-disclosure (hiding a health condition when applying) or a lapsed policy from missed payments. If you're honest on your application and keep your policy active, there is no legal basis for a company to withhold a valid claim. Work with a licensed advisor, disclose everything accurately, and the process is straightforward.</p>
+    </div>
+  </div>
+
+  <div class="faq-item" data-cat="myths">
+    <button class="faq-question" onclick="toggle(this)">
+      "My parents never had it and they were fine"
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">
+      <p>The cost of living, debt levels, and financial complexity today are significantly higher than a generation ago. Your parents likely had lower expenses, fewer loans, and possibly land or assets as a safety net. The economic reality your family would face losing you today is different. What worked for a previous generation isn't a reliable plan for this one.</p>
+    </div>
+  </div>
+
+  <div class="faq-item" data-cat="myths">
+    <button class="faq-question" onclick="toggle(this)">
+      "Isn't it morbid to think about dying?"
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">
+      <p>Planning for it is actually the opposite of morbid — it's responsible. Everyone who truly cares about their family thinks about what would happen to them. Life insurance is just the practical action that follows that thought. The morbid outcome is leaving people you love in financial ruin because the conversation felt uncomfortable.</p>
+    </div>
+  </div>
+
+  <div class="faq-item" data-cat="myths">
+    <button class="faq-question" onclick="toggle(this)">
+      "I don't trust insurance salespeople"
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">
+      <p>Fair. The industry has a history of pushy tactics and products that weren't explained properly. The right advisor should be asking more questions than they're answering in the first meeting. If someone is rushing you to sign, that's a red flag. A good advisor helps you understand what you're buying and why it fits your situation — no pressure.</p>
+    </div>
+  </div>
+
+  <div class="section-label" data-cat="young">I'm Young / No Dependents</div>
+
+  <div class="faq-item" data-cat="young">
+    <button class="faq-question" onclick="toggle(this)">
+      "I'm young and healthy — why do I need it now?"
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">
+      <p>Because young and healthy is exactly when you want to get it. Your premiums are at their lowest when you're in your 20s and 30s. Wait until you're older or until a health issue shows up and either the cost doubles or you get declined entirely. Locking in coverage now is one of the smartest financial moves you can make precisely because you don't need it yet.</p>
+    </div>
+  </div>
+
+  <div class="faq-item" data-cat="young">
+    <button class="faq-question" onclick="toggle(this)">
+      "I don't have any dependents, so what's the point?"
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">
+      <p>A few things still apply. First, if you died tomorrow, who pays for your funeral? That cost falls on whoever loves you most. Second, some policies build cash value over time that you can access while you're alive. Third, your situation will change — relationships, kids, aging parents. Life moves fast. Being covered before those responsibilities arrive is always better than scrambling after.</p>
+    </div>
+  </div>
+
+  <div class="faq-item" data-cat="young">
+    <button class="faq-question" onclick="toggle(this)">
+      "I'm single with no kids — who would even benefit?"
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">
+      <p>You can name anyone as a beneficiary — a parent, a sibling, a close friend. Many people use it to ensure aging parents are taken care of, to cover funeral costs so relatives aren't burdened, or to leave something meaningful to someone who supported them. You don't need a spouse and children for life insurance to make sense.</p>
+    </div>
+  </div>
+
+  <div class="faq-item" data-cat="young">
+    <button class="faq-question" onclick="toggle(this)">
+      "I'll sort it out when I'm older / more settled"
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">
+      <p>Most people who are uninsured in their 50s wish they had started in their 20s. By the time life "settles down" — mortgage, kids in school, aging parents — the premiums are higher and the urgency is greater. The best time to plant a tree was 20 years ago. The second best time is now.</p>
+    </div>
+  </div>
+
+  <div class="faq-item" data-cat="young">
+    <button class="faq-question" onclick="toggle(this)">
+      "I keep meaning to get it but never get around to it"
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">
+      <p>This is the most common and most costly delay. People don't get declined because they're old — they get declined because something changed health-wise in the meantime. A diagnosis, a hospitalization, a medication — any of these can make you uninsurable overnight. The window to get covered at good rates doesn't stay open indefinitely.</p>
+    </div>
+  </div>
+
+  <div class="section-label" data-cat="money">Cost & Money</div>
+
+  <div class="faq-item" data-cat="money">
+    <button class="faq-question" onclick="toggle(this)">
+      "I can't afford it right now"
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">
+      <p>A basic life insurance policy can cost less than what most people spend on data or lunch per week. The question isn't really whether you can afford it — it's whether your family can afford for you not to have it. And the longer you wait, the more expensive it gets. Starting small now is always better than waiting for the "right time" that never comes.</p>
+    </div>
+  </div>
+
+  <div class="faq-item" data-cat="money">
+    <button class="faq-question" onclick="toggle(this)">
+      "I have savings — that's enough"
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">
+      <p>Savings deplete. A prolonged illness before death can drain everything before the policy even pays out. And most people's savings aren't large enough to replace years of income for a family. Life insurance is not a substitute for savings — they serve different purposes. One is for living, the other protects against the financial damage of dying too soon.</p>
+    </div>
+  </div>
+
+  <div class="faq-item" data-cat="money">
+    <button class="faq-question" onclick="toggle(this)">
+      "What's the difference between life insurance and a savings account?"
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">
+      <p>A savings account gives you access to what you put in. Life insurance gives your family access to the full coverage amount from day one — even if you've only paid one premium. If you put $50,000 in a savings account and die, your family gets $50,000. If you have a $5 million policy and die after one payment, your family gets $5 million. That leverage is what makes it fundamentally different.</p>
+    </div>
+  </div>
+
+  <div class="faq-item" data-cat="money">
+    <button class="faq-question" onclick="toggle(this)">
+      "The payout won't be enough to matter"
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">
+      <p>Even a modest payout can cover a mortgage for a year, clear outstanding debt, or fund a child's education. It doesn't have to replace a lifetime of income to make a meaningful difference. The right coverage amount is a conversation, not a guess — and it's usually more affordable than people expect to get meaningful protection.</p>
+    </div>
+  </div>
+
+  <div class="faq-item" data-cat="money">
+    <button class="faq-question" onclick="toggle(this)">
+      "How do I know how much coverage I actually need?"
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">
+      <p>A common starting point is ten times your annual income, but it really depends on your debts, your dependents, your lifestyle, and your goals. A needs analysis with an advisor takes about 20 minutes and gives you a specific number based on your actual situation rather than a generic estimate.</p>
+    </div>
+  </div>
+
+  <div class="section-label" data-cat="policy">How It Works</div>
+
+  <div class="faq-item" data-cat="policy">
+    <button class="faq-question" onclick="toggle(this)">
+      "What if I lose my job and can't keep paying?"
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">
+      <p>Most policies have provisions for situations like this — premium waivers, grace periods, and options to reduce coverage temporarily rather than lapse entirely. The worst thing to do is just stop paying without calling your advisor first. There are usually options people don't know about.</p>
+    </div>
+  </div>
+
+  <div class="faq-item" data-cat="policy">
+    <button class="faq-question" onclick="toggle(this)">
+      "What if I miss a payment?"
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">
+      <p>Most policies have a grace period — usually 30 days — during which you can pay without losing coverage. If you lapse beyond that, some policies have a reinstatement option where you can bring the policy back by catching up on payments. The worst thing to do is miss payments silently. One call to your advisor usually reveals options you didn't know existed.</p>
+    </div>
+  </div>
+
+  <div class="faq-item" data-cat="policy">
+    <button class="faq-question" onclick="toggle(this)">
+      "What if I want to cancel later?"
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">
+      <p>You can. Most policies allow you to cancel at any time. Depending on the type of policy and how long you've held it, there may be a surrender value — meaning you get some money back. The downside is losing your coverage and potentially paying more to re-enter later. But you're never permanently locked in.</p>
+    </div>
+  </div>
+
+  <div class="faq-item" data-cat="policy">
+    <button class="faq-question" onclick="toggle(this)">
+      "What if I outlive my policy?"
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">
+      <p>With term insurance, the coverage ends and there's no payout if you outlive it — that's the trade-off for lower premiums. With whole life, the policy doesn't expire, and many plans accumulate cash value you can access while alive. Understanding which type suits your goals is part of the initial conversation.</p>
+    </div>
+  </div>
+
+  <div class="faq-item" data-cat="policy">
+    <button class="faq-question" onclick="toggle(this)">
+      "Someone I know paid for years and got nothing back"
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">
+      <p>This usually means they had term insurance — pure protection with no payout if you outlive the term, similar to how car insurance works. There are also whole life policies that build cash value you can access or receive back under certain conditions. The right policy depends on what you're trying to accomplish. That's exactly the conversation worth having before you sign anything.</p>
+    </div>
+  </div>
+
+  <div class="faq-item" data-cat="policy">
+    <button class="faq-question" onclick="toggle(this)">
+      "Does life insurance cover accidents?"
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">
+      <p>Standard life insurance covers death from most causes including accidents. Some policies also offer accidental death benefit riders that pay out an additional amount on top of the base sum if death results from an accident specifically. It's worth asking what riders are available when choosing a plan.</p>
+    </div>
+  </div>
+
+  <div class="faq-item" data-cat="policy">
+    <button class="faq-question" onclick="toggle(this)">
+      "What about murder or suicide — does it still pay?"
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">
+      <p>Most policies cover accidental and natural death. Suicide clauses typically apply only within the first one to two years of the policy — after that contestability period, the policy generally pays out. Murder is typically covered as it's classified as an external cause of death. These are standard questions worth asking your advisor directly rather than assuming.</p>
+    </div>
+  </div>
+
+  <div class="faq-item" data-cat="policy">
+    <button class="faq-question" onclick="toggle(this)">
+      "Can I get covered if I already have a health condition?"
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">
+      <p>Depending on the condition, yes. Some conditions are rated — meaning the premium is higher to reflect the risk. Others are excluded from coverage but everything else is still covered. Very few conditions result in outright decline. The only way to know is to apply and go through underwriting. Assuming you won't qualify without trying means potentially leaving your family unprotected unnecessarily.</p>
+    </div>
+  </div>
+
+  <div class="faq-item" data-cat="policy">
+    <button class="faq-question" onclick="toggle(this)">
+      "What if I get sick and can't work before I die?"
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">
+      <p>This is where some life policies go beyond just death benefits. Certain plans include critical illness riders or disability provisions that pay out if you're diagnosed with a serious condition or become unable to work. You don't have to die for the policy to help you. This is worth asking about specifically when choosing coverage.</p>
+    </div>
+  </div>
+
+  <div class="faq-item" data-cat="policy">
+    <button class="faq-question" onclick="toggle(this)">
+      "What if the insurance company goes under?"
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">
+      <p>Legitimate insurance companies operating in Jamaica are regulated by the Financial Services Commission. They are required to maintain reserves and meet solvency standards. Choosing a reputable, established company significantly reduces this risk — which is exactly why the brand you choose matters.</p>
+    </div>
+  </div>
+
+  <div class="section-label" data-cat="family">Family & Work Situations</div>
+
+  <div class="faq-item" data-cat="family">
+    <button class="faq-question" onclick="toggle(this)">
+      "What actually happens to my family if I die without coverage?"
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">
+      <p>The income stops, but the bills don't. Rent or mortgage, school fees, utilities, groceries, loan payments — all of that continues. Most families either go into debt, sell assets, or depend on relatives. A life insurance payout doesn't replace you, but it buys your family time to breathe and rebuild without financial collapse on top of grief.</p>
+    </div>
+  </div>
+
+  <div class="faq-item" data-cat="family">
+    <button class="faq-question" onclick="toggle(this)">
+      "My family will be fine — we take care of each other"
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">
+      <p>Family support is real and valuable. But consider what you're actually asking of them — to financially absorb your death on top of grieving it. That strain breaks families. Life insurance means your passing doesn't also become a financial burden on the people who love you most.</p>
+    </div>
+  </div>
+
+  <div class="faq-item" data-cat="family">
+    <button class="faq-question" onclick="toggle(this)">
+      "Only the breadwinner needs coverage"
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">
+      <p>Think about what a stay-at-home parent actually does — childcare, cooking, household management, school runs. If that person dies, the surviving spouse has to pay for all of those services while still working. The economic value of a non-earning spouse is real. Losing them without coverage creates a financial hole most families don't anticipate.</p>
+    </div>
+  </div>
+
+  <div class="faq-item" data-cat="family">
+    <button class="faq-question" onclick="toggle(this)">
+      "My job already covers me"
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">
+      <p>Group life through an employer is better than nothing, but it has serious limitations. It typically only covers you while you're employed there. If you resign, get laid off, or the company closes, that coverage is gone. You also usually have no control over the coverage amount. Personal life insurance is yours regardless of where you work.</p>
+    </div>
+  </div>
+
+  <div class="faq-item" data-cat="family">
+    <button class="faq-question" onclick="toggle(this)">
+      "I'm self-employed so it's too complicated"
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">
+      <p>Self-employed people actually need life insurance more than salaried workers. There's no HR, no group plan, no employer safety net. If you stop working, the income stops immediately. A policy ensures that if something happens to you, your business debts and personal obligations don't collapse onto your family.</p>
+    </div>
+  </div>
+
+</div>
+
+<div class="bottom-cta">
+  <h2>Still have questions?</h2>
+  <p>Let's talk. No pressure, no jargon — just a straight conversation about protecting your family.</p>
+  <a href="https://wa.me/" class="cta-btn">Chat with Sanoi on WhatsApp</a>
+</div>
+
+<script>
+  function toggle(btn) {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  function filterCat(cat, btn) {
+    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.faq-item, .section-label').forEach(el => {
+      if (cat === 'all') {
+        el.style.display = '';
+      } else {
+        el.style.display = el.dataset.cat === cat ? '' : 'none';
+      }
+    });
+    document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+  }
+</script>
+
+</body>
+</html>
