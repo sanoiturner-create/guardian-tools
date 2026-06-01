@@ -7,7 +7,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
+ 
     :root {
       --navy: #0a1628;
       --deep: #0d1f3c;
@@ -17,7 +17,7 @@
       --muted: #8a9bb5;
       --white: #ffffff;
     }
-
+ 
     body {
       background-color: var(--navy);
       color: var(--white);
@@ -25,8 +25,7 @@
       min-height: 100vh;
       overflow-x: hidden;
     }
-
-    /* Background texture */
+ 
     body::before {
       content: '';
       position: fixed;
@@ -37,8 +36,7 @@
       pointer-events: none;
       z-index: 0;
     }
-
-    /* Diagonal accent line */
+ 
     body::after {
       content: '';
       position: fixed;
@@ -49,7 +47,7 @@
       opacity: 0.3;
       z-index: 0;
     }
-
+ 
     .container {
       position: relative;
       z-index: 1;
@@ -61,20 +59,19 @@
       flex-direction: column;
       justify-content: center;
     }
-
-    /* Header */
+ 
     header {
       padding: 48px 0 0;
       animation: fadeUp 0.8s ease both;
     }
-
+ 
     .logo-line {
       display: flex;
       align-items: center;
       gap: 12px;
       margin-bottom: 40px;
     }
-
+ 
     .logo-emblem {
       width: 36px;
       height: 36px;
@@ -89,7 +86,7 @@
       font-weight: 600;
       flex-shrink: 0;
     }
-
+ 
     .logo-text {
       font-family: 'DM Sans', sans-serif;
       font-size: 11px;
@@ -98,13 +95,12 @@
       color: var(--muted);
       font-weight: 400;
     }
-
-    /* Hero section */
+ 
     .hero {
       padding: 20px 0 56px;
       animation: fadeUp 0.8s 0.15s ease both;
     }
-
+ 
     .guardian-badge {
       display: inline-block;
       font-size: 10px;
@@ -117,7 +113,7 @@
       margin-bottom: 24px;
       font-weight: 400;
     }
-
+ 
     h1 {
       font-family: 'Cormorant Garamond', serif;
       font-size: clamp(38px, 8vw, 58px);
@@ -127,12 +123,12 @@
       color: var(--white);
       margin-bottom: 8px;
     }
-
+ 
     h1 span {
       color: var(--gold);
       font-weight: 600;
     }
-
+ 
     .subtitle {
       font-size: 13px;
       color: var(--muted);
@@ -141,14 +137,14 @@
       margin-bottom: 20px;
       font-weight: 300;
     }
-
+ 
     .divider {
       width: 48px;
       height: 1px;
       background: linear-gradient(to right, var(--gold), transparent);
       margin-bottom: 24px;
     }
-
+ 
     .tagline {
       font-size: 15px;
       color: rgba(255,255,255,0.6);
@@ -156,8 +152,7 @@
       max-width: 420px;
       font-weight: 300;
     }
-
-    /* Tool cards */
+ 
     .tools {
       display: flex;
       flex-direction: column;
@@ -165,7 +160,7 @@
       margin-bottom: 56px;
       animation: fadeUp 0.8s 0.3s ease both;
     }
-
+ 
     .tool-card {
       display: block;
       text-decoration: none;
@@ -178,7 +173,7 @@
       transition: all 0.3s ease;
       cursor: pointer;
     }
-
+ 
     .tool-card::before {
       content: '';
       position: absolute;
@@ -189,7 +184,7 @@
       transform-origin: bottom;
       transition: transform 0.3s ease;
     }
-
+ 
     .tool-card::after {
       content: '';
       position: absolute;
@@ -198,16 +193,16 @@
       opacity: 0;
       transition: opacity 0.3s ease;
     }
-
+ 
     .tool-card:hover {
       border-color: rgba(201,168,76,0.25);
       transform: translateY(-2px);
       box-shadow: 0 12px 40px rgba(0,0,0,0.3);
     }
-
+ 
     .tool-card:hover::before { transform: scaleY(1); }
     .tool-card:hover::after { opacity: 1; }
-
+ 
     .card-inner {
       position: relative;
       z-index: 1;
@@ -216,7 +211,7 @@
       justify-content: space-between;
       gap: 16px;
     }
-
+ 
     .card-icon {
       width: 44px;
       height: 44px;
@@ -229,9 +224,9 @@
       flex-shrink: 0;
       font-size: 18px;
     }
-
+ 
     .card-text { flex: 1; }
-
+ 
     .card-label {
       font-size: 10px;
       letter-spacing: 0.18em;
@@ -240,7 +235,7 @@
       font-weight: 400;
       margin-bottom: 6px;
     }
-
+ 
     .card-title {
       font-family: 'Cormorant Garamond', serif;
       font-size: 22px;
@@ -249,14 +244,14 @@
       letter-spacing: 0.01em;
       margin-bottom: 6px;
     }
-
+ 
     .card-desc {
       font-size: 13px;
       color: var(--muted);
       font-weight: 300;
       line-height: 1.5;
     }
-
+ 
     .card-arrow {
       color: var(--gold);
       font-size: 20px;
@@ -264,44 +259,36 @@
       transition: all 0.3s ease;
       flex-shrink: 0;
     }
-
+ 
     .tool-card:hover .card-arrow {
       opacity: 1;
       transform: translateX(4px);
     }
-
-    /* Footer */
+ 
     footer {
       padding-bottom: 48px;
       animation: fadeUp 0.8s 0.45s ease both;
     }
-
+ 
     .footer-line {
       width: 100%;
       height: 1px;
       background: linear-gradient(to right, rgba(201,168,76,0.2), transparent);
       margin-bottom: 24px;
     }
-
+ 
     .footer-text {
       font-size: 11px;
       color: rgba(255,255,255,0.25);
       letter-spacing: 0.1em;
       text-transform: uppercase;
     }
-
-    .footer-text a {
-      color: rgba(201,168,76,0.5);
-      text-decoration: none;
-    }
-
-    /* Animations */
+ 
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(24px); }
       to   { opacity: 1; transform: translateY(0); }
     }
-
-    /* Mobile */
+ 
     @media (max-width: 480px) {
       .container { padding: 0 20px; }
       .tool-card { padding: 22px 20px; }
@@ -311,14 +298,14 @@
 </head>
 <body>
   <div class="container">
-
+ 
     <header>
       <div class="logo-line">
         <div class="logo-emblem">ST</div>
-        <div class="logo-text">Guardian Life Insurance</div>
+        <div class="logo-text">Life Insurance</div>
       </div>
     </header>
-
+ 
     <section class="hero">
       <div class="guardian-badge">Life Insurance Advisor &nbsp;·&nbsp; Montego Bay</div>
       <h1>Sanoi<br><span>Turner</span></h1>
@@ -326,7 +313,7 @@
       <div class="divider"></div>
       <p class="tagline">Dedicated to securing your family's future with trusted coverage and personalised guidance.</p>
     </section>
-
+ 
     <div class="tools">
       <a href="life-insurance-calculator_1.html" class="tool-card">
         <div class="card-inner">
@@ -339,7 +326,7 @@
           <div class="card-arrow">→</div>
         </div>
       </a>
-
+ 
       <a href="prospect-form.html" class="tool-card">
         <div class="card-inner">
           <div class="card-icon">📋</div>
@@ -351,13 +338,25 @@
           <div class="card-arrow">→</div>
         </div>
       </a>
+ 
+      <a href="sanoi_turner_faq.html" class="tool-card">
+        <div class="card-inner">
+          <div class="card-icon">💬</div>
+          <div class="card-text">
+            <div class="card-label">Tool 03</div>
+            <div class="card-title">FAQs</div>
+            <div class="card-desc">Straight answers to the questions most people are afraid to ask.</div>
+          </div>
+          <div class="card-arrow">→</div>
+        </div>
+      </a>
     </div>
-
+ 
     <footer>
       <div class="footer-line"></div>
-      <p class="footer-text">Guardian Life Insurance &nbsp;·&nbsp; &copy; 2026 Sanoi Turner</p>
+      <p class="footer-text">Life Insurance &nbsp;·&nbsp; &copy; 2026 Sanoi Turner</p>
     </footer>
-
+ 
   </div>
 </body>
 </html>
