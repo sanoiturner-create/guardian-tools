@@ -534,7 +534,16 @@ document.getElementById('prospectForm').addEventListener('submit', async functio
     } else {
       btn.textContent = 'Request My Free Consultation';
       btn.disabled = false;
-      alert('Something went wrong. Please try again or WhatsApp me directly.');
+      let detail = '';
+      try {
+        const err = await resp.json();
+        if (err && err.errors) detail = ' (' + err.errors.map(e => e.message || e.code).join(', ') + ')';
+        else if (err && err.error) detail = ' (' + err.error + ')';
+      } catch (_) {
+        detail = ' (status ' + resp.status + ')';
+      }
+      console.error('Formspree error:', resp.status, detail);
+      alert('Something went wrong' + detail + '. Please try again or WhatsApp me directly.');
     }
   } catch (err) {
     btn.textContent = 'Request My Free Consultation';
