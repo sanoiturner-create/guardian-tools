@@ -566,12 +566,26 @@ window.addEventListener('DOMContentLoaded', function () {
   // Notes
   if (p.get('notes')) document.getElementById('notes').value = p.get('notes');
 
-  // Summary banner
-  const summary = p.get('summary');
+  // Summary banner — built from the params themselves so the link stays short
+  const summary = p.get('summary'); // legacy links may still carry one
+  const bannerEl = document.getElementById('summaryBanner');
+  const textEl = document.getElementById('summaryText');
   if (summary) {
-    document.getElementById('summaryText').textContent = decodeURIComponent(summary);
-    document.getElementById('summaryBanner').classList.add('visible');
+    textEl.textContent = decodeURIComponent(summary);
+    bannerEl.classList.add('visible');
     document.getElementById('hiddenSummary').value = decodeURIComponent(summary);
+  } else {
+    const firstName = (document.getElementById('firstName').value || '').trim();
+    const reasonVal = p.get('reason');
+    const parts = [];
+    parts.push(firstName
+      ? `Welcome back, ${firstName}. I've filled in what we went over so you don't have to type it again.`
+      : `I've filled in what we went over so you don't have to type it again.`);
+    if (reasonVal) parts.push(`We spoke mainly about ${reasonVal.toLowerCase()}.`);
+    parts.push(`Please check everything is right, add anything missing, then submit.`);
+    textEl.textContent = parts.join(' ');
+    bannerEl.classList.add('visible');
+    document.getElementById('hiddenSummary').value = 'Pre-filled from consultation call with Sanoi Turner';
   }
 });
 
