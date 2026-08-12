@@ -19,38 +19,17 @@
       align-items: center;
       gap: 10px;
     }
-    header .logo-mark {
-      width: 10px; height: 10px;
-      background: #B8972A;
-      border-radius: 2px;
-    }
-    header span {
-      color: #fff;
-      font-size: 15px;
-      font-weight: 700;
-      letter-spacing: 0.3px;
-    }
+    header .logo-mark { width: 10px; height: 10px; background: #B8972A; border-radius: 2px; }
+    header span { color: #fff; font-size: 15px; font-weight: 700; letter-spacing: 0.3px; }
     .hero {
       background: linear-gradient(135deg, #0B1F3A 60%, #1a3560);
       color: #fff;
       padding: 36px 20px 32px;
       text-align: center;
     }
-    .hero h1 {
-      font-size: 22px;
-      font-weight: 800;
-      margin-bottom: 10px;
-      line-height: 1.3;
-    }
-    .hero p {
-      font-size: 14px;
-      opacity: 0.75;
-      line-height: 1.6;
-      max-width: 340px;
-      margin: 0 auto;
-    }
+    .hero h1 { font-size: 22px; font-weight: 800; margin-bottom: 10px; line-height: 1.3; }
+    .hero p { font-size: 14px; opacity: 0.75; line-height: 1.6; max-width: 340px; margin: 0 auto; }
 
-    /* Summary banner — shown when pre-filled from sales tool */
     .summary-banner {
       display: none;
       background: #e8f5e9;
@@ -61,55 +40,25 @@
     }
     .summary-banner.visible { display: block; }
     .summary-banner h3 {
-      font-size: 13px;
-      font-weight: 700;
-      color: #1b5e20;
-      letter-spacing: 0.5px;
-      margin-bottom: 8px;
-      text-transform: uppercase;
+      font-size: 13px; font-weight: 700; color: #1b5e20;
+      letter-spacing: 0.5px; margin-bottom: 8px; text-transform: uppercase;
     }
-    .summary-banner p {
-      font-size: 13px;
-      color: #2e7d32;
-      line-height: 1.6;
-      white-space: pre-line;
-    }
+    .summary-banner p { font-size: 13px; color: #2e7d32; line-height: 1.6; white-space: pre-line; }
 
-    .form-wrap {
-      max-width: 480px;
-      margin: 0 auto;
-      padding: 20px 16px 40px;
-    }
+    .form-wrap { max-width: 480px; margin: 0 auto; padding: 20px 16px 40px; }
     .section-label {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      color: #B8972A;
-      text-transform: uppercase;
-      margin: 24px 0 12px;
+      font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+      color: #B8972A; text-transform: uppercase; margin: 24px 0 12px;
     }
     .field { margin-bottom: 14px; }
-    label {
-      display: block;
-      font-size: 12px;
-      font-weight: 600;
-      color: #5a6a7e;
-      margin-bottom: 5px;
-    }
+    label { display: block; font-size: 12px; font-weight: 600; color: #5a6a7e; margin-bottom: 5px; }
     input, select, textarea {
-      width: 100%;
-      padding: 11px 14px;
-      font-size: 15px;
-      border: 1.5px solid #dde3ec;
-      border-radius: 10px;
-      background: #fff;
-      color: #0B1F3A;
-      appearance: none;
-      -webkit-appearance: none;
-      outline: none;
+      width: 100%; padding: 11px 14px; font-size: 15px;
+      border: 1.5px solid #dde3ec; border-radius: 10px;
+      background: #fff; color: #0B1F3A;
+      appearance: none; -webkit-appearance: none; outline: none;
       transition: border-color 0.18s, box-shadow 0.18s, background-color 0.18s;
-      font-family: inherit;
-      min-height: 46px;
+      font-family: inherit; min-height: 46px;
     }
     input:focus, select:focus, textarea:focus {
       border-color: #B8972A;
@@ -118,7 +67,6 @@
     }
     input::placeholder, textarea::placeholder { color: #b6bfcc; }
 
-    /* Selects — restore a soft custom chevron (appearance:none removes the native one) */
     select {
       background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%235a6a7e' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
       background-repeat: no-repeat;
@@ -128,34 +76,21 @@
     }
     select:invalid, select option[value=""] { color: #b6bfcc; }
 
-    /* Date & time — softer native pickers */
     input[type="date"], input[type="time"] {
-      -webkit-appearance: none;
-      appearance: none;
-      background: #fbfcfe;
-      color: #0B1F3A;
-      font-variant-numeric: tabular-nums;
-      letter-spacing: 0.2px;
-      cursor: pointer;
-      min-height: 46px;
+      -webkit-appearance: none; appearance: none;
+      background: #fbfcfe; color: #0B1F3A;
+      font-variant-numeric: tabular-nums; letter-spacing: 0.2px;
+      cursor: pointer; min-height: 46px;
     }
     input[type="date"]:hover, input[type="time"]:hover { background: #f6f8fc; }
-    /* Tint the little calendar/clock glyph to match the brand instead of stark black */
     input[type="date"]::-webkit-calendar-picker-indicator,
     input[type="time"]::-webkit-calendar-picker-indicator {
-      opacity: 0.5;
-      cursor: pointer;
-      padding: 4px;
-      border-radius: 5px;
+      opacity: 0.5; cursor: pointer; padding: 4px; border-radius: 5px;
       filter: sepia(1) saturate(2.2) hue-rotate(5deg) brightness(0.72);
       transition: opacity 0.15s, background-color 0.15s;
     }
     input[type="date"]::-webkit-calendar-picker-indicator:hover,
-    input[type="time"]::-webkit-calendar-picker-indicator:hover {
-      opacity: 1;
-      background: #fdf6e3;
-    }
-    /* iOS Safari renders empty date fields oddly — keep the text aligned and muted */
+    input[type="time"]::-webkit-calendar-picker-indicator:hover { opacity: 1; background: #fdf6e3; }
     input[type="date"]::-webkit-date-and-time-value { text-align: left; }
     input[type="date"]::-webkit-datetime-edit-text,
     input[type="time"]::-webkit-datetime-edit-text { color: #b6bfcc; padding: 0 2px; }
@@ -167,112 +102,76 @@
     input[type="time"]::-webkit-datetime-edit-ampm-field { color: #0B1F3A; }
     input[type="date"]:focus::-webkit-datetime-edit-month-field,
     input[type="date"]:focus::-webkit-datetime-edit-day-field,
-    input[type="date"]:focus::-webkit-datetime-edit-year-field {
-      background: #fdf6e3; border-radius: 3px;
-    }
+    input[type="date"]:focus::-webkit-datetime-edit-year-field { background: #fdf6e3; border-radius: 3px; }
+
     .hint { font-size: 11px; color: #9aa5b4; margin-top: 4px; }
     textarea { height: 90px; resize: vertical; }
     .row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
     .radio-group { display: flex; gap: 10px; }
     .radio-btn {
-      flex: 1;
-      padding: 12px 10px;
-      border: 1.5px solid #dde3ec;
-      border-radius: 10px;
-      background: #fff;
-      font-size: 14px;
-      font-weight: 600;
-      color: #5a6a7e;
-      cursor: pointer;
-      text-align: center;
-      transition: all 0.18s;
-      min-height: 46px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      flex: 1; padding: 12px 10px;
+      border: 1.5px solid #dde3ec; border-radius: 10px; background: #fff;
+      font-size: 14px; font-weight: 600; color: #5a6a7e;
+      cursor: pointer; text-align: center; transition: all 0.18s;
+      min-height: 46px; display: flex; align-items: center; justify-content: center;
     }
     .radio-btn:hover { border-color: #c9d2e0; background: #fbfcfe; }
     .radio-btn.selected {
-      border-color: #B8972A;
-      background: #fffbec;
-      color: #0B1F3A;
+      border-color: #B8972A; background: #fffbec; color: #0B1F3A;
       box-shadow: 0 0 0 3px rgba(184, 151, 42, 0.12);
     }
     input[type="radio"] { display: none; }
 
     .submit-btn {
-      width: 100%;
-      padding: 16px;
-      background: #B8972A;
-      color: #fff;
-      border: none;
-      border-radius: 10px;
-      font-size: 16px;
-      font-weight: 700;
-      cursor: pointer;
-      margin-top: 24px;
-      letter-spacing: 0.3px;
+      width: 100%; padding: 16px;
+      background: #B8972A; color: #fff; border: none; border-radius: 10px;
+      font-size: 16px; font-weight: 700; cursor: pointer;
+      margin-top: 24px; letter-spacing: 0.3px;
     }
     .submit-btn:active { opacity: 0.9; }
-    .privacy {
-      text-align: center;
-      font-size: 11px;
-      color: #9aa5b4;
-      margin-top: 14px;
-      line-height: 1.5;
-    }
+    .privacy { text-align: center; font-size: 11px; color: #9aa5b4; margin-top: 14px; line-height: 1.5; }
 
-    /* Success screen */
-    .success-screen {
-      display: none;
-      text-align: center;
-      padding: 40px 24px;
-    }
+    .success-screen { display: none; text-align: center; padding: 40px 24px; }
     .success-screen.visible { display: block; }
     .success-icon {
-      width: 64px; height: 64px;
-      background: #e8f5e9;
-      border-radius: 32px;
-      margin: 0 auto 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 28px;
+      width: 64px; height: 64px; background: #e8f5e9; border-radius: 32px;
+      margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; font-size: 28px;
     }
-    .success-screen h2 {
-      font-size: 22px;
-      color: #0B1F3A;
-      margin-bottom: 10px;
-      font-weight: 800;
-    }
-    .success-screen p {
-      font-size: 14px;
-      color: #5a6a7e;
-      line-height: 1.6;
-      margin-bottom: 24px;
-    }
+    .success-screen h2 { font-size: 22px; color: #0B1F3A; margin-bottom: 10px; font-weight: 800; }
+    .success-screen p { font-size: 14px; color: #5a6a7e; line-height: 1.6; margin-bottom: 24px; }
+
     .calendly-btn {
-      display: block;
-      width: 100%;
-      padding: 16px;
-      background: #0B1F3A;
-      color: #fff;
-      border: none;
-      border-radius: 10px;
-      font-size: 15px;
-      font-weight: 700;
-      cursor: pointer;
-      text-decoration: none;
-      margin-bottom: 12px;
-      letter-spacing: 0.3px;
+      display: block; width: 100%; padding: 16px;
+      background: #0B1F3A; color: #fff; border: none; border-radius: 10px;
+      font-size: 15px; font-weight: 700; cursor: pointer; text-decoration: none;
+      margin-bottom: 12px; letter-spacing: 0.3px;
     }
     .calendly-btn.gold { background: #B8972A; }
-    .skip-link {
-      font-size: 13px;
-      color: #9aa5b4;
-      text-decoration: none;
-      display: block;
-      margin-top: 8px;
+    .calendly-btn.whatsapp { background: #25D366; }
+
+    /* ── Fallback screen ──────────────────────────────────────────────────────
+       Shown when the form cannot be delivered. Someone who filled this in and hit
+       a dead end is a lost enquiry, so nothing here is a dead end. */
+    .fallback-screen { display: none; padding: 32px 24px; text-align: center; }
+    .fallback-screen.visible { display: block; }
+    .fallback-icon {
+      width: 64px; height: 64px; background: #fff4e5; border-radius: 32px;
+      margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; font-size: 28px;
+    }
+    .fallback-screen h2 { font-size: 20px; color: #0B1F3A; margin-bottom: 10px; font-weight: 800; }
+    .fallback-screen p.lede { font-size: 14px; color: #5a6a7e; line-height: 1.6; margin-bottom: 22px; }
+    .fallback-note { font-size: 12px; color: #9aa5b4; line-height: 1.55; margin-top: 14px; }
+    .answer-box {
+      background: #fff; border: 1.5px solid #dde3ec; border-radius: 10px;
+      padding: 14px; text-align: left; font-size: 12px; color: #5a6a7e;
+      line-height: 1.6; white-space: pre-line; max-height: 190px; overflow-y: auto;
+      margin-bottom: 12px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+    .ghost-btn {
+      display: block; width: 100%; padding: 13px;
+      background: #fff; color: #0B1F3A; border: 1.5px solid #dde3ec; border-radius: 10px;
+      font-size: 14px; font-weight: 700; cursor: pointer; margin-bottom: 10px;
+      text-decoration: none; letter-spacing: 0.2px;
     }
     .form-container { display: block; }
     .form-container.hidden { display: none; }
@@ -290,7 +189,6 @@
   <p>Fill in your details below and I will be in touch to discuss a plan that fits your life and budget.</p>
 </div>
 
-<!-- Summary banner — only visible when pre-filled from sales tool -->
 <div class="summary-banner" id="summaryBanner">
   <h3>Your Consultation Summary</h3>
   <p id="summaryText"></p>
@@ -300,26 +198,54 @@
 
   <!-- SUCCESS SCREEN -->
   <div class="success-screen" id="successScreen">
-    <div class="success-icon">✅</div>
+    <div class="success-icon">&#9989;</div>
     <h2>Request Received!</h2>
     <p id="successMsg">Thank you. I'll be in touch shortly to confirm your consultation details.</p>
 
-    <!-- Calendly scheduling section -->
     <div id="calendlySection" style="background:#f8f9fb;border-radius:12px;padding:20px;margin-bottom:20px;text-align:left;">
       <div style="font-size:11px;font-weight:700;color:#B8972A;letter-spacing:1.5px;margin-bottom:8px;">BOOK YOUR APPOINTMENT</div>
       <p style="font-size:14px;color:#0B1F3A;line-height:1.5;margin-bottom:16px;">
-        Skip the back-and-forth — pick a time that works for you directly from my calendar. You'll get an email confirmation with everything you need.
+        Skip the back-and-forth. Pick a time that works for you directly from my calendar and you'll get an email confirmation with everything you need.
       </p>
-      <a id="calendlyLink" href="https://calendly.com/sanoiturner" target="_blank" class="calendly-btn gold">
-        📅 Pick a Time on My Calendar
+      <a id="calendlyLink" href="#" target="_blank" rel="noopener" class="calendly-btn gold">
+        &#128197; Pick a Time on My Calendar
       </a>
       <p style="font-size:11px;color:#9aa5b4;text-align:center;margin-top:8px;">
-        Opens Calendly — free, no account needed
+        Opens Calendly. Free, and no account needed.
       </p>
     </div>
 
     <p style="font-size:13px;color:#5a6a7e;line-height:1.5;">
       Prefer to wait? I'll reach out within 24 hours to find a time that works.
+    </p>
+  </div>
+
+  <!-- FALLBACK SCREEN — delivery failed, but the enquiry still gets through -->
+  <div class="fallback-screen" id="fallbackScreen">
+    <div class="fallback-icon">&#128241;</div>
+    <h2>Let's do this the quick way</h2>
+    <p class="lede">
+      My form isn't sending right now, which is my problem and not yours. Your answers are safely
+      below. Tap the button and they'll be in a WhatsApp message to me, ready to send.
+    </p>
+
+    <a id="waSend" href="#" target="_blank" rel="noopener" class="calendly-btn whatsapp">
+      &#128172; Send My Details on WhatsApp
+    </a>
+    <a id="waCall" href="#" class="ghost-btn">&#128222; Call me instead</a>
+    <button id="copyAnswers" class="ghost-btn" type="button">Copy my answers</button>
+
+    <div class="answer-box" id="answerBox"></div>
+
+    <a id="calendlyLinkFallback" href="#" target="_blank" rel="noopener" class="ghost-btn">
+      &#128197; Or pick a time on my calendar now
+    </a>
+
+    <button id="retrySubmit" class="ghost-btn" type="button">Try sending the form again</button>
+
+    <p class="fallback-note">
+      Nothing you typed has been lost. If you'd rather not use WhatsApp, copy your answers and email
+      them to me at any time.
     </p>
   </div>
 
@@ -374,9 +300,9 @@
         <label>Preferred Contact Time *</label>
         <select name="contact_time" id="contactTime" required>
           <option value="">Select a time</option>
-          <option value="Morning (8am - 12pm)">Morning (8am – 12pm)</option>
-          <option value="Afternoon (12pm - 4pm)">Afternoon (12pm – 4pm)</option>
-          <option value="Evening (4pm - 7pm)">Evening (4pm – 7pm)</option>
+          <option value="Morning (8am - 12pm)">Morning (8am &ndash; 12pm)</option>
+          <option value="Afternoon (12pm - 4pm)">Afternoon (12pm &ndash; 4pm)</option>
+          <option value="Evening (4pm - 7pm)">Evening (4pm &ndash; 7pm)</option>
         </select>
       </div>
 
@@ -431,9 +357,9 @@
         <select name="budget" id="budget">
           <option value="">Select a range</option>
           <option value="Under $2,000">Under $2,000</option>
-          <option value="$2,000 - $5,000">$2,000 – $5,000</option>
-          <option value="$5,000 - $10,000">$5,000 – $10,000</option>
-          <option value="$10,000 - $20,000">$10,000 – $20,000</option>
+          <option value="$2,000 - $5,000">$2,000 &ndash; $5,000</option>
+          <option value="$5,000 - $10,000">$5,000 &ndash; $10,000</option>
+          <option value="$10,000 - $20,000">$10,000 &ndash; $20,000</option>
           <option value="$20,000+">$20,000+</option>
           <option value="Not sure yet">Not sure yet</option>
         </select>
@@ -459,12 +385,11 @@
         <textarea name="notes" id="notes" placeholder="Anything you'd like me to know before we meet..."></textarea>
       </div>
 
-      <!-- Hidden field to pass pre-filled summary back to Formspree -->
       <input type="hidden" name="consultation_summary" id="hiddenSummary" />
       <input type="hidden" name="_subject" value="New Guardian Life Consultation Request" />
 
       <button type="submit" class="submit-btn">Request My Free Consultation</button>
-      <p class="privacy">🔒 Your information is kept private and will only be used to prepare your consultation. No spam, ever.</p>
+      <p class="privacy">&#128274; Your information is kept private and will only be used to prepare your consultation. No spam, ever.</p>
 
     </form>
   </div>
@@ -472,36 +397,23 @@
 </div><!-- /form-wrap -->
 
 <script>
+// ─── ADVISOR SETTINGS ─────────────────────────────────────────────────────────
+// The only three things to keep up to date in this file.
+// CALENDLY_URL: use the EVENT TYPE link, not your account page. In Calendly open
+// the event, press Share, and copy that. An account page makes the prospect pick
+// a meeting type before they can pick a time, which is one decision too many.
+var ADVISOR_WHATSAPP = "18764648206";                                  // digits only, with country code
+var ADVISOR_PHONE    = "+1-876-464-8206";
+var CALENDLY_URL     = "https://calendly.com/sanoiturner/consultation";
+
 // ─── URL PARAMETER PRE-FILL ───────────────────────────────────────────────────
-// The sales tool builds a link like:
-// prospect-form.html?name=Michelle+Brown&phone=8765551234&reason=Family+Protection
-// &budget=5000-10000&occupation=Nurse&source=Spoke+by+phone&notes=...&summary=...
-//
-// Supported params:
-//   name        Full name (split on space into first/last)
-//   first_name  First name only
-//   last_name   Last name only
-//   phone       WhatsApp/phone
-//   email       Email address
-//   gender      male | female
-//   occupation  Occupation/employer
-//   reason      Primary reason (must match an option value)
-//   budget      Budget range (must match an option value)
-//   source      How they heard (defaults to "Spoke by phone" if pre-filled)
-//   notes       Notes / call summary
-//   summary     Human-readable call summary shown in the banner
-//   smoke       yes | no
-//   insurance   yes | no
-
-function getParam(key) {
-  return new URLSearchParams(window.location.search).get(key);
-}
-
 function setSelect(el, val) {
   if (!el || !val) return;
-  for (let i = 0; i < el.options.length; i++) {
-    if (el.options[i].value.toLowerCase().includes(val.toLowerCase()) ||
-        val.toLowerCase().includes(el.options[i].value.toLowerCase())) {
+  for (var i = 0; i < el.options.length; i++) {
+    var opt = el.options[i].value;
+    if (!opt) continue;
+    if (opt.toLowerCase().indexOf(val.toLowerCase()) !== -1 ||
+        val.toLowerCase().indexOf(opt.toLowerCase()) !== -1) {
       el.selectedIndex = i;
       return;
     }
@@ -528,108 +440,162 @@ function selectIns(val) {
 }
 
 window.addEventListener('DOMContentLoaded', function () {
-  const p = new URLSearchParams(window.location.search);
-  if (!p.toString()) return; // No params — nothing to pre-fill
+  // Point both calendar buttons at the one setting above.
+  document.getElementById('calendlyLink').href = CALENDLY_URL;
+  document.getElementById('calendlyLinkFallback').href = CALENDLY_URL;
+  document.getElementById('waCall').href = 'tel:' + ADVISOR_PHONE.replace(/[^0-9+]/g, '');
 
-  // Name
-  const fullName = p.get('name');
+  var p = new URLSearchParams(window.location.search);
+  if (!p.toString()) return;
+
+  var fullName = p.get('name');
   if (fullName) {
-    const parts = fullName.trim().split(' ');
+    var parts = fullName.trim().split(' ');
     document.getElementById('firstName').value = parts[0] || '';
     document.getElementById('lastName').value = parts.slice(1).join(' ') || '';
   }
   if (p.get('first_name')) document.getElementById('firstName').value = p.get('first_name');
   if (p.get('last_name'))  document.getElementById('lastName').value  = p.get('last_name');
-
-  // Contact
   if (p.get('phone')) document.getElementById('phone').value = p.get('phone');
   if (p.get('email')) document.getElementById('email').value = p.get('email');
-
-  // Gender
   if (p.get('gender')) selectGender(p.get('gender').toLowerCase());
-
-  // Occupation
   if (p.get('occupation')) document.getElementById('occupation').value = p.get('occupation');
-
-  // Dropdowns
   if (p.get('reason'))  setSelect(document.getElementById('reason'),  p.get('reason'));
   if (p.get('budget'))  setSelect(document.getElementById('budget'),  p.get('budget'));
 
-  // Source — default to "Spoke by phone" when coming from the sales tool
-  const src = p.get('source') || 'Spoke by phone';
+  var src = p.get('source') || 'Spoke by phone';
   setSelect(document.getElementById('source'), src);
 
-  // Smoke / insurance
   if (p.get('smoke'))     selectSmoke(p.get('smoke').toLowerCase());
   if (p.get('insurance')) selectIns(p.get('insurance').toLowerCase());
-
-  // Notes
   if (p.get('notes')) document.getElementById('notes').value = p.get('notes');
 
-  // Summary banner — built from the params themselves so the link stays short
-  const summary = p.get('summary'); // legacy links may still carry one
-  const bannerEl = document.getElementById('summaryBanner');
-  const textEl = document.getElementById('summaryText');
+  var summary = p.get('summary');
+  var bannerEl = document.getElementById('summaryBanner');
+  var textEl = document.getElementById('summaryText');
   if (summary) {
     textEl.textContent = decodeURIComponent(summary);
     bannerEl.classList.add('visible');
     document.getElementById('hiddenSummary').value = decodeURIComponent(summary);
   } else {
-    const firstName = (document.getElementById('firstName').value || '').trim();
-    const reasonVal = p.get('reason');
-    const parts = [];
-    parts.push(firstName
-      ? `Welcome back, ${firstName}. I've filled in what we went over so you don't have to type it again.`
-      : `I've filled in what we went over so you don't have to type it again.`);
-    if (reasonVal) parts.push(`We spoke mainly about ${reasonVal.toLowerCase()}.`);
-    parts.push(`Please check everything is right, add anything missing, then submit.`);
-    textEl.textContent = parts.join(' ');
+    var firstName = (document.getElementById('firstName').value || '').trim();
+    var reasonVal = p.get('reason');
+    var bits = [];
+    bits.push(firstName
+      ? 'Welcome back, ' + firstName + ". I've filled in what we went over so you don't have to type it again."
+      : "I've filled in what we went over so you don't have to type it again.");
+    if (reasonVal) bits.push('We spoke mainly about ' + reasonVal.toLowerCase() + '.');
+    bits.push('Please check everything is right, add anything missing, then submit.');
+    textEl.textContent = bits.join(' ');
     bannerEl.classList.add('visible');
     document.getElementById('hiddenSummary').value = 'Pre-filled from consultation call with Sanoi Turner';
   }
 });
 
+// ─── ANSWERS AS READABLE TEXT ─────────────────────────────────────────────────
+// Used by the fallback, so a delivery failure never costs the enquiry.
+function collectAnswers() {
+  var v = function (id) { var el = document.getElementById(id); return el ? el.value.trim() : ''; };
+  var radio = function (name) {
+    var el = document.querySelector('input[name="' + name + '"]:checked');
+    return el ? el.value : '';
+  };
+  var rows = [
+    ['Name', [v('firstName'), v('lastName')].filter(Boolean).join(' ')],
+    ['Date of birth', v('dob')],
+    ['Gender', radio('gender')],
+    ['Phone', v('phone')],
+    ['Email', v('email')],
+    ['Best time to call', v('contactTime')],
+    ['Occupation', v('occupation')],
+    ['Smoker', radio('smoker')],
+    ['Existing insurance', radio('existing_insurance')],
+    ['Reason', v('reason')],
+    ['Monthly budget', v('budget')],
+    ['Heard about you via', v('source')],
+    ['Notes', v('notes')]
+  ];
+  return rows.filter(function (r) { return r[1]; })
+             .map(function (r) { return r[0] + ': ' + r[1]; })
+             .join('\n');
+}
+
+function showFallback() {
+  var answers = collectAnswers();
+  var first = document.getElementById('firstName').value.trim() || 'there';
+
+  var message = 'Hi Sanoi, I filled in your consultation form but it would not send, '
+              + 'so here are my details:\n\n' + answers;
+
+  document.getElementById('answerBox').textContent = answers || 'No answers captured.';
+  document.getElementById('waSend').href =
+    'https://wa.me/' + ADVISOR_WHATSAPP + '?text=' + encodeURIComponent(message);
+
+  document.getElementById('copyAnswers').onclick = function () {
+    var btn = this;
+    var done = function () { btn.textContent = 'Copied'; setTimeout(function () { btn.textContent = 'Copy my answers'; }, 2200); };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(message).then(done, function () { btn.textContent = 'Select the text below and copy'; });
+    } else {
+      btn.textContent = 'Select the text below and copy';
+    }
+  };
+
+  document.getElementById('formContainer').classList.add('hidden');
+  document.getElementById('summaryBanner').classList.remove('visible');
+  document.getElementById('fallbackScreen').classList.add('visible');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  // Log the real reason for the advisor, never for the prospect to read.
+  return first;
+}
+
+document.getElementById('retrySubmit').addEventListener('click', function () {
+  document.getElementById('fallbackScreen').classList.remove('visible');
+  document.getElementById('formContainer').classList.remove('hidden');
+  var btn = document.querySelector('.submit-btn');
+  btn.textContent = 'Request My Free Consultation';
+  btn.disabled = false;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
 // ─── FORM SUBMISSION ──────────────────────────────────────────────────────────
-document.getElementById('prospectForm').addEventListener('submit', async function(e) {
+document.getElementById('prospectForm').addEventListener('submit', async function (e) {
   e.preventDefault();
-  const btn = this.querySelector('.submit-btn');
+  var btn = this.querySelector('.submit-btn');
   btn.textContent = 'Sending...';
   btn.disabled = true;
 
   try {
-    const data = new FormData(this);
-    const resp = await fetch(this.action, {
+    var data = new FormData(this);
+    var resp = await fetch(this.action, {
       method: 'POST',
       body: data,
       headers: { 'Accept': 'application/json' }
     });
 
     if (resp.ok) {
-      const firstName = document.getElementById('firstName').value || 'there';
+      var firstName = document.getElementById('firstName').value || 'there';
       document.getElementById('successMsg').textContent =
-        `Thank you, ${firstName}. I've received your request and will be in touch shortly to confirm your consultation.`;
+        'Thank you, ' + firstName + ". I've received your request and will be in touch shortly to confirm your consultation.";
       document.getElementById('formContainer').classList.add('hidden');
       document.getElementById('successScreen').classList.add('visible');
       document.getElementById('summaryBanner').classList.remove('visible');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
-      btn.textContent = 'Request My Free Consultation';
-      btn.disabled = false;
-      let detail = '';
+      // The prospect does not need to see a status code. They need a way through.
+      var detail = 'status ' + resp.status;
       try {
-        const err = await resp.json();
-        if (err && err.errors) detail = ' (' + err.errors.map(e => e.message || e.code).join(', ') + ')';
-        else if (err && err.error) detail = ' (' + err.error + ')';
-      } catch (_) {
-        detail = ' (status ' + resp.status + ')';
-      }
-      console.error('Formspree error:', resp.status, detail);
-      alert('Something went wrong' + detail + '. Please try again or WhatsApp me directly.');
+        var err = await resp.json();
+        if (err && err.errors) detail = err.errors.map(function (x) { return x.message || x.code; }).join(', ');
+        else if (err && err.error) detail = err.error;
+      } catch (_) {}
+      console.error('Form delivery failed:', resp.status, detail);
+      showFallback();
     }
   } catch (err) {
-    btn.textContent = 'Request My Free Consultation';
-    btn.disabled = false;
-    alert('Could not send. Please check your connection and try again.');
+    console.error('Form delivery failed (network):', err);
+    showFallback();
   }
 });
 </script>
