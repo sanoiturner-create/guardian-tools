@@ -203,6 +203,12 @@
  
     .tool-card:hover::before { transform: scaleY(1); }
     .tool-card:hover::after { opacity: 1; }
+
+    .tool-card.play {
+      background: rgba(201,168,76,0.07);
+      border-color: rgba(201,168,76,0.28);
+    }
+    .tool-card.play::before { transform: scaleY(1); }
  
     .card-inner {
       position: relative;
@@ -339,12 +345,24 @@
           <div class="card-arrow">→</div>
         </div>
       </a>
- 
+
+      <a href="insurance-games.html" class="tool-card play">
+        <div class="card-inner">
+          <div class="card-icon">🎲</div>
+          <div class="card-text">
+            <div class="card-label">Tool 03</div>
+            <div class="card-title">Play: Myth or Fact</div>
+            <div class="card-desc">Six questions, one minute. Most of what people believe about insurance is secondhand.</div>
+          </div>
+          <div class="card-arrow">→</div>
+        </div>
+      </a>
+
       <a href="sanoi_turner_faq.html" class="tool-card">
         <div class="card-inner">
           <div class="card-icon">💬</div>
           <div class="card-text">
-            <div class="card-label">Tool 03</div>
+            <div class="card-label">Tool 04</div>
             <div class="card-title">FAQs</div>
             <div class="card-desc">Straight answers to the questions most people are afraid to ask.</div>
           </div>
