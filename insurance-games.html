@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Play: Insurance Myth or Fact | Sanoi Turner</title>
+<meta name="description" content="Two quick insurance games. Six questions, one minute.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0A2340;
+  --navy-2:#123057;
+  --gold:#E3B23C;
+  --cream:#F6F2E7;
+  --green:#3FA372;
+  --red:#E05B4B;
+  --line:rgba(246,242,231,.16);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{
+  background:var(--navy);
+  color:var(--cream);
+  font-family:Archivo,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  font-size:17px;
+  line-height:1.45;
+  min-height:100svh;
+  display:flex;
+  justify-content:center;
+}
+.shell{
+  width:100%;
+  max-width:520px;
+  min-height:100svh;
+  padding:20px 20px calc(24px + env(safe-area-inset-bottom));
+  display:flex;
+  flex-direction:column;
+}
+.top{display:flex;align-items:center;gap:12px;min-height:34px;margin-bottom:14px}
+.back{
+  appearance:none;border:1px solid var(--line);background:none;color:var(--cream);
+  font:inherit;font-size:14px;padding:6px 12px;border-radius:999px;cursor:pointer;
+}
+.back:focus-visible,button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.pips{display:flex;gap:6px;margin-left:auto}
+.pip{width:9px;height:9px;border-radius:50%;border:1px solid var(--line);background:none}
+.pip.hit{background:var(--gold);border-color:var(--gold)}
+.pip.miss{background:var(--red);border-color:var(--red)}
+
+h1{
+  font-weight:800;font-size:clamp(34px,11vw,46px);line-height:.98;
+  letter-spacing:-.03em;margin:24px 0 0;
+}
+h1 span{display:block;color:var(--gold)}
+.sub{color:rgba(246,242,231,.72);margin:14px 0 0;max-width:30ch}
+
+.menu{margin-top:34px;display:flex;flex-direction:column;gap:12px}
+.tile{
+  display:block;width:100%;text-align:left;cursor:pointer;
+  background:var(--navy-2);border:1px solid var(--line);border-radius:14px;
+  padding:18px 18px;color:var(--cream);font:inherit;
+}
+.tile b{display:block;font-weight:800;font-size:21px;letter-spacing:-.01em}
+.tile small{display:block;color:rgba(246,242,231,.66);font-size:14px;margin-top:4px}
+.tile.gold{background:var(--gold);color:#0A2340;border-color:var(--gold)}
+.tile.gold small{color:rgba(10,35,64,.72)}
+
+.card{flex:1;display:flex;flex-direction:column;justify-content:center;padding:8px 0 0}
+.kicker{font-size:14px;color:var(--gold);font-weight:600;margin-bottom:14px}
+.q{font-weight:800;font-size:clamp(25px,7.4vw,33px);line-height:1.14;letter-spacing:-.02em;margin:0}
+.who{color:rgba(246,242,231,.72);font-size:16px;margin:0 0 14px}
+
+.answers{margin-top:auto;padding-top:26px;display:flex;flex-direction:column;gap:10px}
+.row{display:flex;gap:10px}
+.btn{
+  flex:1;cursor:pointer;font:inherit;font-weight:800;font-size:19px;
+  padding:18px 14px;border-radius:12px;border:1px solid var(--line);
+  background:var(--navy-2);color:var(--cream);
+}
+.btn.opt{font-size:16px;font-weight:600;text-align:left;line-height:1.3}
+.btn.primary{background:var(--gold);border-color:var(--gold);color:#0A2340}
+.btn:disabled{opacity:.45;cursor:default}
+
+.verdict{margin-top:auto;padding-top:22px}
+.badge{font-weight:800;font-size:20px;letter-spacing:-.01em}
+.badge.good{color:var(--green)}
+.badge.bad{color:var(--red)}
+.why{margin:8px 0 18px;color:rgba(246,242,231,.86)}
+
+.domino{display:block;margin:26px auto 0}
+.score{text-align:center;font-weight:800;font-size:clamp(30px,9vw,40px);letter-spacing:-.02em;margin:22px 0 6px}
+.verdictline{text-align:center;color:rgba(246,242,231,.75);margin:0 auto;max-width:28ch}
+
+.pickrow{display:flex;gap:8px;margin:16px 0 0;flex-wrap:wrap}
+.chip{
+  cursor:pointer;font:inherit;font-size:14px;padding:9px 13px;border-radius:999px;
+  border:1px solid var(--line);background:none;color:var(--cream);
+}
+.chip[aria-pressed="true"]{background:var(--cream);color:var(--navy);border-color:var(--cream)}
+#preview{width:100%;border-radius:12px;margin-top:16px;display:block;border:1px solid var(--line)}
+.hint{font-size:13.5px;color:rgba(246,242,231,.6);margin-top:12px}
+.foot{margin-top:26px;padding-top:16px;border-top:1px solid var(--line);font-size:14px;color:rgba(246,242,231,.6)}
+.foot a{color:var(--gold)}
+.hidden{display:none}
+@media (prefers-reduced-motion:no-preference){
+  .card,.menu{animation:rise .22s ease-out}
+  @keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+}
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="top">
+    <button class="back hidden" id="back">Back</button>
+    <div class="pips" id="pips"></div>
+  </div>
+  <div id="view"></div>
+</div>
+
+<script>
+/* ============================================================
+   EDIT THESE TWO LINES ONLY
+   ============================================================ */
+const WHATSAPP = "1876XXXXXXX";              // your number, no plus, no spaces
+const LINKTREE = "linktr.ee/sanoi.turner";
+const AGENT    = "Sanoi Turner";
+const COMPANY  = "Guardian Life";
+
+/* ============================================================
+   MYTH OR FACT. Six are drawn at random each round.
+   answer: true = FACT, false = MYTH
+   ============================================================ */
+const MYTHS = [
+  { q:"Life insurance only pays out when you die.", a:false,
+    why:"Plenty of plans pay while you are still here. Critical illness pays on diagnosis, and some plans build a cash value you can borrow against." },
+  { q:"The cover your job gives you follows you when you leave.", a:false,
+    why:"Group cover usually ends with the job. A policy in your own name stays yours whether you move, quit or get laid off." },
+  { q:"The younger you start, the less it costs.", a:true,
+    why:"Age is one of the main things the price is built on, and it never goes back down." },
+  { q:"A smoker cannot get life insurance.", a:false,
+    why:"Smokers are insured every day. There is a smoker rate, not a locked door." },
+  { q:"If you name a beneficiary, the money still has to go through the estate.", a:false,
+    why:"A named beneficiary is paid directly. That is the whole point of naming one." },
+  { q:"Miss one payment and the policy is finished.", a:false,
+    why:"There is a grace period, and a policy that has lapsed can often be brought back. Say something early instead of going quiet." },
+  { q:"You always have to do a full medical before you can be covered.", a:false,
+    why:"Some plans are issued with no medical questions at all. Others need only a few answers." },
+  { q:"You can change your beneficiary later.", a:true,
+    why:"It is your policy. Life changes, and the paperwork can change with it." },
+  { q:"Insurance is only worth it if you have children.", a:false,
+    why:"Funeral costs and debts do not disappear because someone was single. Somebody still settles them." },
+  { q:"A health condition means no company will take you.", a:false,
+    why:"It can mean a different rate or a different plan. Automatic refusal is the exception, not the rule." },
+  { q:"You get a short window after receiving your policy to cancel it and get your money back.", a:true,
+    why:"It is called the free look period. Read the document in that window, not after it." },
+  { q:"Once you sign, the cover starts that same second.", a:false,
+    why:"Cover starts when the application is accepted and the first premium is in. Signing is the beginning, not the finish." },
+
+  { q:"Leaving a condition off the application to keep the price down is smart.", a:false,
+    why:"It is the single fastest way to have a claim questioned. The saving goes to the company, the problem goes to your family." },
+  { q:"If you leave something off the form, the company can query a claim years later.", a:true,
+    why:"There is a period after the policy starts where the answers you gave can be revisited. Honest answers are what make a claim boring." },
+  { q:"Getting worse health after you are approved can get your policy cancelled.", a:false,
+    why:"Once it is in force and you are paying, the company cannot drop you because your health changed. That is what you bought." },
+  { q:"Life insurance and health insurance are the same product.", a:false,
+    why:"One replaces income when somebody dies. The other pays a share of medical bills while you live. Most people need to think about both." },
+  { q:"Health insurance usually pays the whole bill.", a:false,
+    why:"Most plans pay a share and you cover the rest. Knowing your share before you need it is the whole exercise." },
+  { q:"Health plans usually make you wait before covering a condition you already had.", a:true,
+    why:"Waiting periods on pre-existing conditions are normal. Another reason not to wait until something is wrong." },
+  { q:"NIS was designed to replace your salary if you die.", a:false,
+    why:"It was never built to carry a household. Treat it as a small piece, not the plan." },
+  { q:"You must have a job letter or payslip to be insured.", a:false,
+    why:"Farmers, vendors, barbers and taxi men are insured all the time. Income can be shown in other ways." },
+  { q:"You can hold more than one policy at the same time.", a:true,
+    why:"You can, within limits on the total cover a company will issue on one life. Adding to what you have is normal." },
+  { q:"An agent decides whether you are approved.", a:false,
+    why:"An agent takes the application. Underwriting decides. Anyone who promises you an approval is guessing." },
+  { q:"Asking for a quote costs you money.", a:false,
+    why:"A quote costs nothing and puts you under no obligation. You pay when a policy is issued and you accept it." },
+  { q:"Insurance companies look for reasons not to pay.", a:false,
+    why:"Claims get paid every week. The ones that get stuck almost always trace back to something left off the form." },
+  { q:"If money gets tight, cancelling is the only option.", a:false,
+    why:"You can often lower the cover, change the plan, or let a built up value carry the payments for a while. Call before you cancel." },
+  { q:"You need a lawyer to make a claim.", a:false,
+    why:"A claim is paperwork, a death certificate and the policy. Your agent walks the family through it." },
+  { q:"A beneficiary has to be a blood relative.", a:false,
+    why:"It can be a spouse, a partner, a friend, a business partner or a trust. Naming someone is the important part." },
+  { q:"You can split the payout between several people.", a:true,
+    why:"You set the shares by percentage. Say it in writing so nobody is left arguing." },
+  { q:"If no beneficiary is named, the money still finds the family quickly.", a:false,
+    why:"With nobody named it goes to the estate, and the estate takes time and costs money. Name somebody." },
+  { q:"Naming a young child as beneficiary means they collect the money straight away.", a:false,
+    why:"A minor cannot receive it directly. Without an arrangement for who holds it, the money sits waiting." },
+  { q:"You can take a policy on your parent without their knowledge.", a:false,
+    why:"The person being insured has to know, sign and answer the health questions. No signature, no policy." },
+  { q:"Term insurance pays out only if you die within the term.", a:true,
+    why:"That is the trade. It buys the most cover for the least money, and it ends on a date." },
+  { q:"Critical illness cover pays you while you are alive.", a:true,
+    why:"It pays a lump sum on diagnosis of a covered illness, so the bills and the missing salary are handled while you recover." },
+  { q:"Accidental death cover pays out no matter how you die.", a:false,
+    why:"It pays only on an accident, and most people do not die in one. It is an add on, never the main cover." },
+  { q:"Waiver of premium keeps your policy alive if you cannot work.", a:true,
+    why:"If you become disabled, the company pays your premium and the cover stays in force. It is one of the cheapest riders on the form." },
+  { q:"Some policies build a value you can borrow against.", a:true,
+    why:"On the plans that build cash value, you can borrow against it. It is a loan against your own policy, so it has to be handled with care." },
+  { q:"You must pay premiums yearly in one lump.", a:false,
+    why:"Monthly, quarterly and half yearly are all normal. Paying more often usually costs a little more in total." },
+  { q:"Group health cover at work automatically includes your spouse and children.", a:false,
+    why:"Family is usually added and paid for separately. Check what is actually on your card." },
+  { q:"Insurance companies and agents in Jamaica are regulated.", a:true,
+    why:"The Financial Services Commission registers them. You are entitled to ask any agent for their registration." },
+  { q:"A policy bought young stays yours even if you migrate.", a:true,
+    why:"It stays in force as long as it is paid. Tell the company when you move so the paperwork keeps up with you." },
+  { q:"Insuring a child is not possible.", a:false,
+    why:"Children are insured for education and future planning. The parent pays and the plan is written on the child." },
+  { q:"You should review your policy after a big life change.", a:true,
+    why:"New baby, new marriage, new mortgage, a separation. Any of those can make yesterday's beneficiary the wrong one." }
+];
+
+const SCENES = [
+  { who:"Rohan, route taxi, one earner at home",
+    q:"He can afford something small today. He says he will start next month when the road is busier.",
+    opts:[
+      { t:"Start small now and raise it later", p:2, why:"Cover starting today beats a bigger plan starting some day. The amount can grow with him. Health and age cannot be rewound." },
+      { t:"Wait for the busier month", p:0, why:"Next month has a way of moving. Every month of waiting is a month with nothing behind the family." },
+      { t:"Put the money in a partner instead", p:1, why:"A partner is good saving, but it pays out what he put in. It cannot pay out what he never got the chance to earn." }
+    ]},
+  { who:"Kerry-Ann, call centre agent",
+    q:"The job gives her group life cover. She is thinking of skipping her own policy.",
+    opts:[
+      { t:"Rely on the job cover", p:0, why:"It ends the day the job ends, and she will be older and pricier by then." },
+      { t:"Keep the job cover and add a small policy of her own", p:2, why:"One follows the job, one follows her. Only one of those is still there after a resignation letter." },
+      { t:"Cancel the job cover and buy her own", p:1, why:"No reason to give up something the employer is paying for. Keep both." }
+    ]},
+  { who:"Mr Brown, 58, keeps good health",
+    q:"He has been meaning to sort this out for about ten years.",
+    opts:[
+      { t:"Look at it now while he is well", p:2, why:"Good health is the thing being bought here. It is worth the most on the day before anything is wrong." },
+      { t:"Wait until something shows up in a check-up", p:0, why:"That is the one day cover gets harder and dearer to get." },
+      { t:"Decide he has left it too late", p:1, why:"58 is not too late. Options narrow, they do not close." }
+    ]},
+  { who:"Miss Campbell, shop owner",
+    q:"Everything she has is tied up in the shop. Two children at home.",
+    opts:[
+      { t:"Everything stays in stock, the shop is the security", p:0, why:"Stock is only worth something if somebody is there to sell it. That is the gap." },
+      { t:"Take out cover on herself first", p:2, why:"The shop runs on her. Protect the engine before the goods." },
+      { t:"Insure the building and leave it there", p:1, why:"Good, and it covers the wrong risk. Fire is not what would empty that house." }
+    ]},
+  { who:"Damion, 26, no dependants",
+    q:"He says there is nobody depending on him, so there is nothing to protect.",
+    opts:[
+      { t:"Skip it entirely for now", p:0, why:"His rate will never be cheaper than it is at 26, and health can change without warning." },
+      { t:"Take a small plan now and build on it", p:2, why:"He locks in a young rate, covers funeral costs and any debt, and grows it when a family comes." },
+      { t:"Wait until he marries", p:1, why:"Fair thinking, but the price of waiting is paid by whoever he marries." }
+    ]},
+  { who:"Andrea, hotel housekeeping, seasonal hours",
+    q:"Big money in winter season, thin in September. She wants cover but the income moves.",
+    opts:[
+      { t:"Set the premium off her peak season pay", p:0, why:"A plan sized for December lapses in September. Lapsing costs her the policy and the money already paid in." },
+      { t:"Set it at what she can hold in the slow months", p:2, why:"Build it around the worst month, not the best one. She can top it up when season money comes." },
+      { t:"Wait until she gets a year round job", p:1, why:"Understandable, but seasonal workers are insured all the time. The plan just has to fit the season." }
+    ]},
+  { who:"Mr Powell, farmer, land in his name, three grown children",
+    q:"He wants the children to get on after he is gone. Only one of them farms.",
+    opts:[
+      { t:"Leave the land and let them sort it out", p:0, why:"Land split three ways among people who want different things is how families stop speaking." },
+      { t:"Cover that pays cash, so the farm can stay whole", p:2, why:"The one who farms keeps the land, the others get their share in money. Nothing has to be sold to be fair." },
+      { t:"Divide the land on paper now", p:1, why:"Better than nothing, but it still splits the one thing that only works in one piece." }
+    ]},
+  { who:"Kemar, security guard on nights, weekend work too",
+    q:"He agrees he needs it. He is also exhausted and forgets things.",
+    opts:[
+      { t:"Pay cash each month when he remembers", p:0, why:"That is how policies lapse. Not a money problem, a memory problem." },
+      { t:"Salary deduction or a standing order", p:2, why:"Take the decision out of a tired man's hands. It goes before he sees it and the cover never breaks." },
+      { t:"Leave it until his shift pattern settles", p:1, why:"Shift patterns rarely settle. Set it up small and automatic instead." }
+    ]},
+  { who:"Dwayne, barber, rents a chair, all cash",
+    q:"He assumes no payslip means no policy, so he has never asked.",
+    opts:[
+      { t:"Accept that he cannot be covered", p:0, why:"Wrong assumption, and it has cost a lot of self employed people a lot of years." },
+      { t:"Apply anyway and show income another way", p:2, why:"Bank lodgements, a rent receipt for the chair, a simple record of takings. Self employed people are insured every day." },
+      { t:"Have a family member buy it for him", p:1, why:"Possible, but the person insured still has to sign and answer for himself. Simpler for him to own it." }
+    ]},
+  { who:"Marsha, new baby, tight month",
+    q:"Money is stretched. She wants to protect the baby.",
+    opts:[
+      { t:"Insure the baby first", p:1, why:"A kind instinct in the wrong order. The baby is not the one paying the rent." },
+      { t:"Cover herself at the smallest amount she can hold", p:2, why:"The baby's real protection is Marsha's income continuing. Start on her, add the child plan when things ease." },
+      { t:"Wait until money settles", p:0, why:"A newborn is exactly when a household can least afford to lose an earner." }
+    ]},
+  { who:"Mr Reid, 45, has a policy from twenty years ago",
+    q:"He pays it every month and has not read it since he signed.",
+    opts:[
+      { t:"Leave it, it is paid and that is enough", p:1, why:"Paid is good. Unknown is not. He may be carrying cover that no longer matches his life." },
+      { t:"Review what it covers and who the beneficiary is", p:2, why:"Twenty years ago the beneficiary may have been a parent or an ex. That one line decides who gets the money." },
+      { t:"Cancel it and start something new", p:0, why:"He would be throwing away a rate set at 25 and buying at 45. Review first, replace only if it truly makes sense." }
+    ]},
+  { who:"Trevor, changed jobs last month",
+    q:"His premium came off his old salary. The deduction stopped when he left.",
+    opts:[
+      { t:"Wait for the company to call him", p:0, why:"By the time anyone calls, the policy may already have lapsed. The responsibility is his." },
+      { t:"Set up a standing order this week", p:2, why:"Moving it to his own account keeps the policy and the original rate. Ten minutes of admin." },
+      { t:"Let it lapse and restart later", p:1, why:"Restarting means new health questions and a new age. The old policy is worth saving." }
+    ]},
+  { who:"Camille, wants to cover her mother",
+    q:"She will pay for it. Her mother lives in the country and the form needs signing.",
+    opts:[
+      { t:"Sign it for her to save the trip", p:0, why:"That is fraud, and it hands the company a clean reason to refuse the claim. Never." },
+      { t:"Take the form to her mother to sign and answer", p:2, why:"The person insured signs and answers her own health questions. Camille can still be the one paying." },
+      { t:"Give up on the idea", p:1, why:"No need. One trip, or the agent visits. It is a normal arrangement." }
+    ]},
+  { who:"Ricardo, offered cover two ways",
+    q:"His workplace offers a plan and an agent has quoted him separately. He is stuck.",
+    opts:[
+      { t:"Do nothing until he has researched for a few months", p:0, why:"Months of research protects nobody. He is uncovered the whole time." },
+      { t:"Take the workplace plan now and add his own", p:2, why:"They do different jobs. One is cheap while he is there, one stays when he leaves." },
+      { t:"Take the agent's plan and skip the workplace one", p:1, why:"His own policy is the more important of the two, but turning down subsidised cover is leaving money on the table." }
+    ]},
+  { who:"Nadine, sending money home from overseas",
+    q:"Her mother in Jamaica depends on what she sends every month.",
+    opts:[
+      { t:"Nothing needed, she is young and working", p:0, why:"Her mother's household runs on a remittance. If it stops suddenly, so does the household." },
+      { t:"Cover on Nadine, with her mother as beneficiary", p:2, why:"The money her mother relies on is Nadine's income. That is exactly the thing to insure." },
+      { t:"Cover on the mother instead", p:1, why:"Worth having for final expenses, but it does not replace the monthly money coming in." }
+    ]}
+];
+
+/* ============================================================
+   STATUS CARDS are generated from the myth bank above, so every
+   question you add there becomes a postable card automatically.
+   ============================================================ */
+const STATUS_Q = MYTHS.map(m => m.q);
+
+/* ============================================================ */
+const view = document.getElementById("view");
+const back = document.getElementById("back");
+const pipsEl = document.getElementById("pips");
+let state = {};
+
+back.onclick = () => home();
+
+const QUEUE = { myth:[], scene:[] };
+function draw(key, bank, n){
+  if(QUEUE[key].length < n) QUEUE[key] = shuffle(bank.map((_,i)=>i));
+  return QUEUE[key].splice(0,n).map(i => bank[i]);
+}
+function shuffle(a){ a = a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
+function esc(s){ return String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
+function setPips(marks,total){
+  pipsEl.innerHTML = "";
+  if(!total){ return; }
+  for(let i=0;i<total;i++){
+    const d = document.createElement("i");
+    d.className = "pip" + (marks[i]===true?" hit":marks[i]===false?" miss":"");
+    pipsEl.appendChild(d);
+  }
+}
+
+/* ---------- home ---------- */
+function home(){
+  back.classList.add("hidden");
+  setPips([],0);
+  state = {};
+  view.innerHTML = `
+    <h1>Six questions.<span>One minute.</span></h1>
+    <p class="sub">Most of what people believe about insurance in Jamaica is secondhand. See how you do.</p>
+    <div class="menu">
+      <button class="tile gold" data-go="myth"><b>Myth or Fact</b><small>Six drawn from ${MYTHS.length}. Different set every round.</small></button>
+      <button class="tile" data-go="scene"><b>What Would You Do</b><small>Five cases drawn from ${SCENES.length}. Pick for them.</small></button>
+      <button class="tile" data-go="status"><b>Make a status card</b><small>For posting. This one is for ${esc(AGENT.split(" ")[0])}.</small></button>
+    </div>
+    <div class="foot">
+      Questions are for learning, not advice on your own situation. No prices here.
+      Ask about your own on <a href="https://${esc(LINKTREE)}">${esc(LINKTREE)}</a>.
+    </div>`;
+  view.querySelectorAll("[data-go]").forEach(b => b.onclick = () => {
+    const g = b.dataset.go;
+    if(g==="myth") startMyth(); else if(g==="scene") startScene(); else statusMaker();
+  });
+}
+
+/* ---------- myth or fact ---------- */
+function startMyth(){
+  back.classList.remove("hidden");
+  state = { game:"myth", set:draw("myth", MYTHS, 6), i:0, marks:[], score:0 };
+  askMyth();
+}
+function askMyth(){
+  const s = state, item = s.set[s.i];
+  setPips(s.marks, 6);
+  view.innerHTML = `
+    <div class="card">
+      <div class="kicker">Question ${s.i+1} of 6</div>
+      <p class="q">${esc(item.q)}</p>
+      <div class="answers">
+        <div class="row">
+          <button class="btn" data-v="0">Myth</button>
+          <button class="btn" data-v="1">Fact</button>
+        </div>
+      </div>
+    </div>`;
+  view.querySelectorAll("[data-v]").forEach(b => b.onclick = () => judgeMyth(b.dataset.v === "1"));
+}
+function judgeMyth(said){
+  const s = state, item = s.set[s.i], right = said === item.a;
+  s.marks.push(right); if(right) s.score++;
+  setPips(s.marks, 6);
+  view.innerHTML = `
+    <div class="card">
+      <div class="kicker">Question ${s.i+1} of 6</div>
+      <p class="q">${esc(item.q)}</p>
+      <div class="verdict">
+        <div class="badge ${right?"good":"bad"}">${right?"Correct.":"Not quite."} That one is ${item.a?"fact":"myth"}.</div>
+        <p class="why">${esc(item.why)}</p>
+        <button class="btn primary" id="next">${s.i===5?"See your score":"Next question"}</button>
+      </div>
+    </div>`;
+  document.getElementById("next").onclick = () => {
+    s.i++;
+    if(s.i>5) resultMyth(); else askMyth();
+  };
+}
+function resultMyth(){
+  const n = state.score;
+  const lines = ["Everything you know came from road talk. Worth a proper conversation.",
+                 "One in six. Most of what you have been told is off.",
+                 "A couple landed. The rest is worth unlearning.",
+                 "Halfway. You know enough to ask better questions.",
+                 "Four of six. Better than most people who own a policy.",
+                 "Five of six. You have clearly asked somebody before.",
+                 "Clean sweep. You should be selling this."];
+  setPips([],0);
+  view.innerHTML = `
+    <div class="card">
+      ${domino(n, 6-n)}
+      <div class="score">${n} of 6</div>
+      <p class="verdictline">${esc(lines[n])}</p>
+      ${endButtons("I scored " + n + " of 6 on your Myth or Fact game.")}
+    </div>`;
+  wireEnd(startMyth);
+}
+
+/* ---------- what would you do ---------- */
+function startScene(){
+  back.classList.remove("hidden");
+  state = { game:"scene", set:draw("scene", SCENES, 5), i:0, marks:[], score:0 };
+  askScene();
+}
+function askScene(){
+  const s = state, sc = s.set[s.i];
+  setPips(s.marks, 5);
+  const opts = shuffle(sc.opts.map((o,ix)=>({o,ix})));
+  s.order = opts;
+  view.innerHTML = `
+    <div class="card">
+      <div class="kicker">Case ${s.i+1} of 5</div>
+      <p class="who">${esc(sc.who)}</p>
+      <p class="q">${esc(sc.q)}</p>
+      <div class="answers">
+        ${opts.map((x,k)=>`<button class="btn opt" data-k="${k}">${esc(x.o.t)}</button>`).join("")}
+      </div>
+    </div>`;
+  view.querySelectorAll("[data-k]").forEach(b => b.onclick = () => judgeScene(+b.dataset.k));
+}
+function judgeScene(k){
+  const s = state, sc = s.set[s.i], chosen = s.order[k].o, best = chosen.p === 2;
+  s.marks.push(best); s.score += chosen.p;
+  setPips(s.marks, 5);
+  view.innerHTML = `
+    <div class="card">
+      <div class="kicker">Case ${s.i+1} of 5</div>
+      <p class="who">${esc(sc.who)}</p>
+      <p class="q">${esc(chosen.t)}</p>
+      <div class="verdict">
+        <div class="badge ${best?"good":"bad"}">${best?"Strongest call.":chosen.p===1?"Reasonable, not the strongest.":"That one costs him."}</div>
+        <p class="why">${esc(chosen.why)}</p>
+        <button class="btn primary" id="next">${s.i===4?"See how you did":"Next case"}</button>
+      </div>
+    </div>`;
+  document.getElementById("next").onclick = () => {
+    s.i++;
+    if(s.i>4) resultScene(); else askScene();
+  };
+}
+function resultScene(){
+  const n = state.score, best = state.marks.filter(Boolean).length;
+  let line = "You made the safe call more often than not.";
+  if(n>=9) line = "You would give the same advice an advisor would give.";
+  else if(n>=6) line = "Solid instincts. A few calls cost the family.";
+  else line = "Most of these choices leave somebody carrying the bill.";
+  setPips([],0);
+  view.innerHTML = `
+    <div class="card">
+      ${domino(best, 5-best)}
+      <div class="score">${n} of 10</div>
+      <p class="verdictline">${esc(line)} You picked the strongest option ${best} out of 5 times.</p>
+      ${endButtons("I scored " + n + " of 10 on your What Would You Do game.")}
+    </div>`;
+  wireEnd(startScene);
+}
+
+/* ---------- shared end screen ---------- */
+function endButtons(shareText){
+  const wa = "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(shareText + " Got a question about my own cover.");
+  return `<div class="answers">
+      <a class="btn primary" style="text-align:center;text-decoration:none;display:block" href="${wa}">Ask ${esc(AGENT.split(" ")[0])} a question</a>
+      <button class="btn" id="again">Play again</button>
+      <button class="btn" id="menu">Other game</button>
+    </div>
+    <div class="foot">${esc(AGENT)}, ${esc(COMPANY)}. Nothing here is a quote or advice on your own situation.</div>`;
+}
+function wireEnd(again){
+  const a = document.getElementById("again"); if(a) a.onclick = again;
+  const m = document.getElementById("menu"); if(m) m.onclick = home;
+}
+
+/* ---------- domino tile ---------- */
+function domino(left,right){
+  const P = {0:[],1:[[1,1]],2:[[0,0],[2,2]],3:[[0,0],[1,1],[2,2]],
+             4:[[0,0],[2,0],[0,2],[2,2]],5:[[0,0],[2,0],[1,1],[0,2],[2,2]],
+             6:[[0,0],[2,0],[0,1],[2,1],[0,2],[2,2]]};
+  const dot = (x,y,cx,cy,fill) => `<circle cx="${cx+ x*30}" cy="${cy + y*30}" r="8.5" fill="${fill}"/>`;
+  const half = (ox,n,fill) => (P[Math.min(n,6)]||[]).map(([x,y])=>dot(x,y,ox+25,32,fill)).join("");
+  return `<svg class="domino" width="188" height="104" viewBox="0 0 188 104" role="img" aria-label="${left} correct, ${right} missed">
+    <rect x="1.5" y="1.5" width="185" height="101" rx="12" fill="#F6F2E7" stroke="#E3B23C" stroke-width="3"/>
+    <line x1="94" y1="12" x2="94" y2="92" stroke="#0A2340" stroke-width="3" opacity=".25"/>
+    ${half(0,left,"#0A2340")}
+    ${half(94,right,"#E05B4B")}
+  </svg>`;
+}
+
+/* ---------- status card maker ---------- */
+let statusOrder = [];
+let statusIndex = 0;
+function nextStatus(){
+  if(!statusOrder.length) statusOrder = shuffle(STATUS_Q.map((_,i)=>i));
+  const at = statusOrder.indexOf(statusIndex);
+  statusIndex = statusOrder[(at+1) % statusOrder.length];
+  drawStatus();
+}
+function statusMaker(){
+  back.classList.remove("hidden");
+  setPips([],0);
+  if(!statusOrder.length){ statusOrder = shuffle(STATUS_Q.map((_,i)=>i)); statusIndex = statusOrder[0]; }
+  view.innerHTML = `
+    <div class="card" style="justify-content:flex-start">
+      <h1 style="font-size:32px;margin-top:6px">Status card</h1>
+      <p class="sub">Pick a question, save the image, post it. Replies land in your chats.</p>
+      <p class="hint" id="counter" style="margin-top:14px"></p>
+      <canvas id="preview" width="1080" height="1920"></canvas>
+      <div class="answers" style="padding-top:16px">
+        <button class="btn primary" id="save">Save the image</button>
+        <button class="btn" id="shuffleq">Different question</button>
+      </div>
+      <p class="hint">On iPhone, if the save does not start, press and hold the image and choose Add to Photos.</p>
+    </div>`;
+  document.getElementById("shuffleq").onclick = nextStatus;
+  document.getElementById("save").onclick = saveStatus;
+  drawStatus();
+}
+function drawStatus(){
+  const c = document.getElementById("counter");
+  if(c) c.textContent = "Card " + (statusOrder.indexOf(statusIndex)+1) + " of " + STATUS_Q.length + ". Post a different one each day.";
+  const cv = document.getElementById("preview"), g = cv.getContext("2d");
+  g.fillStyle = "#0A2340"; g.fillRect(0,0,1080,1920);
+  g.strokeStyle = "#E3B23C"; g.lineWidth = 6; g.strokeRect(56,56,968,1808);
+
+  g.fillStyle = "#E3B23C";
+  g.font = "600 40px Archivo, sans-serif";
+  g.fillText("MYTH OR FACT", 112, 260);
+
+  g.fillStyle = "#F6F2E7";
+  const text = STATUS_Q[statusIndex].replace(/^Myth or fact:\s*/i,"");
+  const size = text.length > 88 ? 64 : text.length > 62 ? 74 : 84;
+  g.font = "800 " + size + "px Archivo, sans-serif";
+  wrap(g, text.charAt(0).toUpperCase()+text.slice(1), 112, 430, 856, Math.round(size*1.18));
+
+  g.fillStyle = "#E3B23C";
+  g.fillRect(112,1360,180,8);
+  g.fillStyle = "#F6F2E7";
+  g.font = "600 46px Archivo, sans-serif";
+  g.fillText("Reply to this status", 112, 1450);
+  g.fillStyle = "rgba(246,242,231,.72)";
+  g.font = "400 40px Archivo, sans-serif";
+  g.fillText("with myth or fact. I answer everyone.", 112, 1510);
+
+  g.fillStyle = "#F6F2E7";
+  g.font = "800 44px Archivo, sans-serif";
+  g.fillText(AGENT, 112, 1700);
+  g.fillStyle = "rgba(246,242,231,.66)";
+  g.font = "400 36px Archivo, sans-serif";
+  g.fillText(COMPANY + "  |  " + LINKTREE, 112, 1756);
+}
+function wrap(g,txt,x,y,max,lh){
+  const words = txt.split(" ");
+  let line = "", yy = y;
+  for(const w of words){
+    const test = line ? line + " " + w : w;
+    if(g.measureText(test).width > max && line){ g.fillText(line, x, yy); line = w; yy += lh; }
+    else line = test;
+  }
+  if(line) g.fillText(line, x, yy);
+}
+function saveStatus(){
+  const cv = document.getElementById("preview");
+  cv.toBlob(b => {
+    const url = URL.createObjectURL(b);
+    const a = document.createElement("a");
+    a.href = url; a.download = "status-card-" + (statusIndex+1) + ".png";
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(()=>URL.revokeObjectURL(url), 4000);
+  }, "image/png");
+}
+
+if(document.fonts && document.fonts.ready){ document.fonts.ready.then(()=>{ if(document.getElementById("preview")) drawStatus(); }); }
+home();
+</script>
+</body>
+</html>
